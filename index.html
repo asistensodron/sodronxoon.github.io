@@ -34,6 +34,7 @@ body {
 .main-header {
     background: rgba(20, 25, 45, 0.7);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 12px 20px;
     display: flex;
     justify-content: space-between;
@@ -142,6 +143,8 @@ body {
     width: 100%;
     z-index: 99;
     height: 52px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .desktop-tabs .tab-btn {
@@ -155,6 +158,7 @@ body {
     transition: 0.2s;
     position: relative;
     border-bottom: 3px solid transparent;
+    white-space: nowrap;
 }
 
 .desktop-tabs .tab-btn:hover {
@@ -221,12 +225,24 @@ body {
 }
 
 /* ========================================
-   GAME GRID
+   GAME GRID - 3 KOLOM RAPI (FIX TOTAL)
    ======================================== */
+#page-games {
+    padding: 10px 10px 80px 10px !important;
+}
+
+.game-grid-wrapper {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 4px;
+}
+
 .game-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 8px;
+    width: 100%;
 }
 
 .game-grid.hidden {
@@ -236,13 +252,21 @@ body {
 .game-card {
     background: rgba(25, 32, 55, 0.7);
     backdrop-filter: blur(8px);
-    border-radius: 20px;
-    padding: 12px 6px;
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 8px 4px;
     text-align: center;
     cursor: pointer;
     border: 1px solid rgba(255,255,255,0.08);
-    position: relative;
     transition: all 0.15s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 90px;
+    max-width: 148px;
+    margin: 0 auto;
 }
 
 .game-card:hover {
@@ -256,26 +280,190 @@ body {
 
 .game-img {
     position: relative;
-    width: 70px;
-    height: 70px;
-    margin: 0 auto;
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
 }
 
 .game-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    display: block;
 }
 
 .game-name {
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 500;
-    margin-top: 8px;
+    margin-top: 5px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 100%;
+    width: 100%;
+    padding: 0 2px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.moneyjar-sticker {
+    position: absolute;
+    bottom: -3px;
+    left: -3px;
+    background: linear-gradient(135deg, #FFD700, #FF8C00);
+    color: #1a1a2e;
+    font-size: 5px;
+    font-weight: bold;
+    padding: 1px 4px;
+    border-radius: 8px;
+    z-index: 5;
+    white-space: nowrap;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+/* Desktop */
+@media (min-width: 769px) {
+    .game-grid-wrapper {
+        max-width: 480px;
+    }
+    
+    .game-grid {
+        gap: 10px;
+    }
+    
+    .game-card {
+        max-width: 148px;
+        min-height: 100px;
+        padding: 10px 6px;
+    }
+    
+    .game-img {
+        width: 65px;
+        height: 65px;
+    }
+    
+    .game-name {
+        font-size: 10px;
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .game-grid-wrapper {
+        max-width: 420px;
+        padding: 0 4px;
+    }
+    
+    .game-grid {
+        gap: 8px;
+    }
+    
+    .game-card {
+        max-width: 130px;
+        min-height: 80px;
+        padding: 6px 3px;
+        border-radius: 10px;
+    }
+    
+    .game-img {
+        width: 52px;
+        height: 52px;
+    }
+    
+    .game-name {
+        font-size: 8px;
+        margin-top: 4px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .game-grid-wrapper {
+        max-width: 100%;
+        padding: 0 6px;
+    }
+    
+    .game-grid {
+        gap: 8px;
+    }
+    
+    .game-card {
+        max-width: 115px;
+        min-height: 75px;
+        padding: 6px 3px;
+        border-radius: 10px;
+    }
+    
+    .game-img {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .game-name {
+        font-size: 8px;
+        margin-top: 3px;
+    }
+}
+
+/* Mobile kecil */
+@media (max-width: 400px) {
+    .game-grid-wrapper {
+        padding: 0 4px;
+    }
+    
+    .game-grid {
+        gap: 6px;
+    }
+    
+    .game-card {
+        max-width: 100px;
+        min-height: 65px;
+        padding: 5px 2px;
+        border-radius: 8px;
+    }
+    
+    .game-img {
+        width: 42px;
+        height: 42px;
+    }
+    
+    .game-name {
+        font-size: 7px;
+        margin-top: 3px;
+    }
+    
+    .moneyjar-sticker {
+        font-size: 4px;
+        padding: 1px 3px;
+    }
+}
+
+/* HP sangat kecil */
+@media (max-width: 350px) {
+    .game-grid {
+        gap: 5px;
+    }
+    
+    .game-card {
+        max-width: 85px;
+        min-height: 55px;
+        padding: 4px 2px;
+        border-radius: 6px;
+    }
+    
+    .game-img {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .game-name {
+        font-size: 6px;
+        margin-top: 2px;
+    }
 }
 
 .moneyjar-sticker {
@@ -284,10 +472,10 @@ body {
     left: -4px;
     background: linear-gradient(135deg, #FFD700, #FF8C00);
     color: #1a1a2e;
-    font-size: 8px;
+    font-size: 6px;
     font-weight: bold;
     padding: 2px 4px;
-    border-radius: 10px;
+    border-radius: 8px;
     z-index: 5;
     white-space: nowrap;
 }
@@ -318,23 +506,24 @@ body {
    GAME PLAY - SIDEBAR
    ======================================== */
 .game-play-sidebar {
-    width: 85px;
+    width: 80px;
     flex-shrink: 0;
     background: rgba(0,0,0,0.9);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-right: 1px solid rgba(255,255,255,0.1);
     display: flex;
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 8px 4px;
-    gap: 8px;
+    padding: 6px 3px;
+    gap: 6px;
     height: 100%;
     max-height: 100%;
 }
 
 .game-play-sidebar::-webkit-scrollbar {
-    width: 4px;
+    width: 3px;
 }
 
 .game-play-sidebar::-webkit-scrollbar-thumb {
@@ -344,8 +533,8 @@ body {
 
 .game-play-sidebar .sidebar-game-item {
     text-align: center;
-    padding: 6px 4px;
-    border-radius: 12px;
+    padding: 4px 3px;
+    border-radius: 10px;
     cursor: pointer;
     transition: 0.1s;
     background: rgba(255,255,255,0.05);
@@ -371,19 +560,19 @@ body {
 }
 
 .game-play-sidebar .sidebar-game-item .side-img {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 4px;
+    border-radius: 8px;
+    margin-bottom: 3px;
 }
 
 .game-play-sidebar .sidebar-game-item .side-name {
-    font-size: 9px;
+    font-size: 8px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 70px;
+    max-width: 60px;
     opacity: 0.7;
 }
 
@@ -410,14 +599,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 16px;
+    padding: 8px 14px;
     background: #111;
     border-bottom: 1px solid #333;
     flex-shrink: 0;
 }
 
 .game-frame-header .frame-title {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     opacity: 0.8;
 }
@@ -430,12 +619,22 @@ body {
 .game-frame-header .btn-close-frame {
     background: #e74c3c;
     border: none;
-    padding: 6px 16px;
+    padding: 4px 14px;
     border-radius: 30px;
     color: white;
     cursor: pointer;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 11px;
+    transition: 0.2s;
+}
+
+.game-frame-header .btn-close-frame:hover {
+    background: #c0392b;
+    transform: scale(1.05);
+}
+
+.game-frame-header .btn-close-frame:active {
+    transform: scale(0.95);
 }
 
 .game-frame-container .frame-body {
@@ -473,8 +672,8 @@ body {
 }
 
 .game-frame-container .loading-overlay .spinner {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border: 3px solid rgba(243, 156, 18, 0.1);
     border-top-color: #f39c12;
     border-radius: 50%;
@@ -482,8 +681,8 @@ body {
 }
 
 .game-frame-container .loading-overlay p {
-    margin-top: 12px;
-    font-size: 13px;
+    margin-top: 10px;
+    font-size: 12px;
     opacity: 0.6;
 }
 
@@ -536,7 +735,7 @@ body {
    MUSIK - PLAYLIST
    ======================================== */
 .musik-playlist {
-    width: 280px;
+    width: 260px;
     flex-shrink: 0;
     background: rgba(25, 32, 55, 0.5);
     border-radius: 16px;
@@ -555,9 +754,9 @@ body {
 }
 
 .musik-playlist .playlist-title {
-    font-size: 12px;
+    font-size: 11px;
     opacity: 0.5;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -565,12 +764,12 @@ body {
 .musik-playlist .playlist-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 10px;
+    gap: 8px;
+    padding: 6px 8px;
     border-radius: 10px;
     cursor: pointer;
     transition: 0.15s;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
 }
 
 .musik-playlist .playlist-item:hover {
@@ -583,9 +782,9 @@ body {
 }
 
 .musik-playlist .playlist-item .song-number {
-    font-size: 11px;
+    font-size: 10px;
     opacity: 0.4;
-    width: 24px;
+    width: 20px;
     text-align: center;
 }
 
@@ -595,7 +794,7 @@ body {
 }
 
 .musik-playlist .playlist-item .song-info .song-name {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
@@ -603,7 +802,7 @@ body {
 }
 
 .musik-playlist .playlist-item .song-info .song-artist {
-    font-size: 10px;
+    font-size: 9px;
     opacity: 0.5;
     white-space: nowrap;
     overflow: hidden;
@@ -611,7 +810,7 @@ body {
 }
 
 .musik-playlist .playlist-item .play-icon {
-    font-size: 14px;
+    font-size: 12px;
     opacity: 0.3;
 }
 
@@ -637,11 +836,11 @@ body {
     flex: 1;
     background: rgba(25, 32, 55, 0.7);
     border-radius: 16px;
-    padding: 16px;
+    padding: 14px;
     border: 1px solid rgba(255,255,255,0.08);
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     min-height: 0;
     position: relative;
     overflow: hidden;
@@ -665,19 +864,20 @@ body {
 }
 
 .musik-cover {
-    width: 80px;
-    height: 80px;
-    border-radius: 16px;
+    width: 70px;
+    height: 70px;
+    border-radius: 14px;
     background: linear-gradient(135deg, #f39c12, #e74c3c);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
+    font-size: 28px;
     box-shadow: 0 8px 32px rgba(243, 156, 18, 0.3);
     flex-shrink: 0;
     position: relative;
     z-index: 1;
     align-self: center;
+    transition: all 0.3s ease;
 }
 
 .musik-cover.playing {
@@ -697,13 +897,13 @@ body {
 }
 
 .musik-info .song-title {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     color: white;
 }
 
 .musik-info .song-artist {
-    font-size: 12px;
+    font-size: 11px;
     opacity: 0.6;
     margin-top: 2px;
 }
@@ -730,7 +930,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
     position: relative;
     z-index: 1;
     flex-wrap: wrap;
@@ -740,10 +940,10 @@ body {
     background: rgba(255,255,255,0.06);
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     color: white;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
     display: flex;
@@ -779,10 +979,10 @@ body {
 }
 
 .musik-controls .btn-play {
-    width: 54px;
-    height: 54px;
+    width: 48px;
+    height: 48px;
     background: linear-gradient(135deg, #f39c12, #e67e22);
-    font-size: 24px;
+    font-size: 22px;
     box-shadow: 0 4px 20px rgba(243, 156, 18, 0.3);
 }
 
@@ -808,41 +1008,41 @@ body {
    AKUN PAGE
    ======================================== */
 .akun-container {
-    max-width: 550px;
+    max-width: 500px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 16px;
 }
 
 .akun-container .profile-card {
     background: rgba(25, 32, 55, 0.7);
-    border-radius: 24px;
-    padding: 24px;
+    border-radius: 20px;
+    padding: 20px;
     text-align: center;
     border: 1px solid rgba(255,255,255,0.08);
 }
 
 .akun-container .profile-card .avatar-big {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #f39c12;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .akun-container .profile-card .nickname {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     margin-bottom: 4px;
 }
 
 .akun-container .profile-card .account-badge {
     display: inline-block;
-    padding: 4px 12px;
+    padding: 3px 10px;
     border-radius: 20px;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     background: rgba(243, 156, 18, 0.2);
     color: #f39c12;
     border: 1px solid rgba(243, 156, 18, 0.3);
@@ -862,24 +1062,24 @@ body {
 
 .akun-container .input-group {
     text-align: left;
-    margin-top: 16px;
+    margin-top: 12px;
 }
 
 .akun-container .input-group label {
     display: block;
-    font-size: 12px;
+    font-size: 11px;
     opacity: 0.7;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .akun-container .input-group input {
     width: 100%;
-    padding: 12px 16px;
+    padding: 10px 14px;
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px;
+    border-radius: 10px;
     color: white;
-    font-size: 14px;
+    font-size: 13px;
     transition: 0.2s;
 }
 
@@ -895,13 +1095,13 @@ body {
 
 .akun-container .btn-save {
     width: 100%;
-    padding: 12px;
-    margin-top: 16px;
+    padding: 10px;
+    margin-top: 12px;
     background: linear-gradient(135deg, #f39c12, #e67e22);
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     color: #0a0a1a;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     cursor: pointer;
     transition: 0.2s;
@@ -917,13 +1117,13 @@ body {
 
 .akun-container .btn-guest {
     width: 100%;
-    padding: 12px;
-    margin-top: 10px;
+    padding: 10px;
+    margin-top: 8px;
     background: linear-gradient(135deg, #2ecc71, #27ae60);
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     color: #0a0a1a;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     cursor: pointer;
     transition: 0.2s;
@@ -939,13 +1139,13 @@ body {
 
 .akun-container .btn-default {
     width: 100%;
-    padding: 12px;
-    margin-top: 10px;
+    padding: 10px;
+    margin-top: 8px;
     background: linear-gradient(135deg, #3498db, #2980b9);
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     color: white;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     cursor: pointer;
     transition: 0.2s;
@@ -960,42 +1160,39 @@ body {
 }
 
 .akun-container .token-status {
-    margin-top: 12px;
-    font-size: 12px;
+    margin-top: 10px;
+    font-size: 11px;
     opacity: 0.5;
-}
-
-.akun-container .uid-hidden {
-    display: none;
 }
 
 /* ========================================
    SETTING PAGE
    ======================================== */
 .setting-container {
-    max-width: 600px;
+    max-width: 550px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 16px;
 }
 
 .setting-container .card {
     background: rgba(25, 32, 55, 0.7);
-    border-radius: 24px;
-    padding: 24px;
+    border-radius: 20px;
+    padding: 20px;
     border: 1px solid rgba(255,255,255,0.08);
 }
 
 .setting-container .card h3 {
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     color: #f39c12;
+    font-size: 16px;
 }
 
 .setting-container .card .step {
-    padding: 12px 16px;
+    padding: 10px 14px;
     background: rgba(255,255,255,0.05);
-    border-radius: 12px;
-    margin-bottom: 10px;
-    font-size: 13px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    font-size: 12px;
     line-height: 1.6;
 }
 
@@ -1007,32 +1204,33 @@ body {
    ABOUT PAGE
    ======================================== */
 .about-container {
-    max-width: 650px;
+    max-width: 600px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 16px;
 }
 
 .about-container .about-card {
     background: rgba(25, 32, 55, 0.7);
-    border-radius: 24px;
-    padding: 30px 24px;
+    border-radius: 20px;
+    padding: 24px 20px;
     border: 1px solid rgba(255,255,255,0.08);
     text-align: center;
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .about-container .about-avatar {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid #f39c12;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     box-shadow: 0 8px 32px rgba(243, 156, 18, 0.3);
 }
 
 .about-container .about-name {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 800;
     background: linear-gradient(135deg, #f39c12, #e74c3c);
     -webkit-background-clip: text;
@@ -1041,18 +1239,18 @@ body {
 }
 
 .about-container .about-role {
-    font-size: 14px;
+    font-size: 13px;
     opacity: 0.6;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .about-container .about-bio {
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.8;
     opacity: 0.85;
     text-align: left;
-    padding: 0 8px;
-    margin-bottom: 16px;
+    padding: 0 4px;
+    margin-bottom: 14px;
 }
 
 .about-container .about-bio span {
@@ -1063,36 +1261,37 @@ body {
 .about-container .about-bio .highlight-box {
     background: rgba(243, 156, 18, 0.08);
     border-left: 3px solid #f39c12;
-    padding: 12px 16px;
+    padding: 10px 14px;
     border-radius: 8px;
-    margin: 10px 0;
-    font-size: 13px;
+    margin: 8px 0;
+    font-size: 12px;
 }
 
 .about-container .about-bio .highlight-box .emoji {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .about-container .social-links {
     display: flex;
     justify-content: center;
-    gap: 16px;
+    gap: 12px;
     flex-wrap: wrap;
-    margin-top: 12px;
+    margin-top: 10px;
 }
 
 .about-container .social-links a {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
+    gap: 6px;
+    padding: 8px 16px;
     background: rgba(255,255,255,0.06);
     border-radius: 30px;
     color: white;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 12px;
     transition: 0.3s;
     border: 1px solid rgba(255,255,255,0.05);
+    cursor: pointer;
 }
 
 .about-container .social-links a:hover {
@@ -1107,7 +1306,7 @@ body {
 }
 
 .about-container .social-links .social-icon {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .about-container .social-links .link-xoon {
@@ -1123,9 +1322,9 @@ body {
 .about-container .about-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-top: 20px;
-    padding-top: 20px;
+    gap: 10px;
+    margin-top: 16px;
+    padding-top: 16px;
     border-top: 1px solid rgba(255,255,255,0.06);
 }
 
@@ -1134,13 +1333,13 @@ body {
 }
 
 .about-container .about-stats .stat-number {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     color: #f39c12;
 }
 
 .about-container .about-stats .stat-label {
-    font-size: 10px;
+    font-size: 9px;
     opacity: 0.5;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1148,19 +1347,19 @@ body {
 }
 
 .about-container .version-info {
-    margin-top: 16px;
-    font-size: 11px;
+    margin-top: 14px;
+    font-size: 10px;
     opacity: 0.3;
     text-align: center;
 }
 
 .about-container .credit-note {
-    margin-top: 12px;
-    padding: 12px 16px;
+    margin-top: 10px;
+    padding: 10px 14px;
     background: rgba(231, 76, 60, 0.08);
-    border-radius: 12px;
+    border-radius: 10px;
     border: 1px solid rgba(231, 76, 60, 0.15);
-    font-size: 12px;
+    font-size: 11px;
     opacity: 0.7;
     text-align: center;
 }
@@ -1179,10 +1378,12 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(10, 10, 26, 0.95);
+    background: rgba(10, 10, 26, 0.98);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-top: 1px solid rgba(255,255,255,0.05);
-    padding: 8px 0;
+    padding: 6px 0;
+    padding-bottom: env(safe-area-inset-bottom);
     z-index: 200;
 }
 
@@ -1195,12 +1396,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
-    padding: 6px 12px;
+    gap: 1px;
+    padding: 4px 10px;
     border-radius: 8px;
     cursor: pointer;
     color: rgba(255,255,255,0.5);
-    font-size: 10px;
+    font-size: 9px;
     transition: 0.15s;
     border: none;
     background: none;
@@ -1211,7 +1412,7 @@ body {
 }
 
 .mobile-bottom-nav .nav-item .icon {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 /* ========================================
@@ -1224,23 +1425,28 @@ body {
     transform: translateX(-50%);
     background: rgba(0,0,0,0.9);
     backdrop-filter: blur(12px);
-    padding: 12px 24px;
+    -webkit-backdrop-filter: blur(12px);
+    padding: 10px 20px;
     border-radius: 60px;
     z-index: 2000;
     font-weight: bold;
     animation: fadeOut 2.5s ease forwards;
     border-left: 4px solid #f39c12;
     white-space: nowrap;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
 }
 
 @keyframes fadeOut {
-    0% { opacity: 1; }
-    70% { opacity: 1; }
-    100% { opacity: 0; visibility: hidden; }
+    0% { opacity: 1; transform: translateX(-50%) scale(1); }
+    70% { opacity: 1; transform: translateX(-50%) scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) scale(0.9); visibility: hidden; }
 }
 
 /* ========================================
-   RESPONSIVE - TABLET & MOBILE
+   RESPONSIVE - TETAP 3 KOLOM
    ======================================== */
 @media (max-width: 768px) {
     .desktop-tabs { display: none; }
@@ -1248,20 +1454,50 @@ body {
     
     .main-layout {
         top: 72px;
-        height: calc(100vh - 72px - 60px);
+        height: calc(100vh - 72px - 56px);
         padding: 0;
     }
     
     .main-content { max-width: 100%; border-radius: 0; }
-    .game-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
     
-    .main-header .logo { font-size: 18px; }
-    .main-header .logo img { width: 32px; height: 32px; }
+    .game-grid-wrapper {
+        padding: 0 2px;
+        max-width: 100%;
+    }
     
-    .header-actions button { font-size: 10px; padding: 6px 12px; }
-    .akun-container, .setting-container { padding: 12px; }
-    .page-content { padding: 12px 12px 80px 12px; }
-    .toast-notif { bottom: 70px; }
+    .game-grid {
+        gap: 8px;
+    }
+    
+    .game-card {
+        padding: 8px 4px;
+        border-radius: 12px;
+        min-height: 85px;
+        aspect-ratio: 1 / 1.12;
+    }
+    
+    .game-img {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .game-name {
+        font-size: 9px;
+        margin-top: 4px;
+    }
+    
+    .moneyjar-sticker {
+        font-size: 5px;
+        padding: 1px 3px;
+    }
+    
+    .main-header .logo { font-size: 17px; }
+    .main-header .logo img { width: 30px; height: 30px; }
+    
+    .header-actions button { font-size: 9px; padding: 5px 10px; }
+    .akun-container, .setting-container { padding: 10px; }
+    .page-content { padding: 10px 10px 70px 10px; }
+    .toast-notif { bottom: 65px; font-size: 11px; padding: 8px 14px; }
 
     .musik-container .musik-body {
         flex-direction: column;
@@ -1269,152 +1505,203 @@ body {
     
     .musik-playlist {
         width: 100%;
-        max-height: 160px;
+        max-height: 140px;
         flex-shrink: 0;
+        padding: 10px;
     }
     
     .musik-player-wrapper {
-        min-height: 280px;
-        padding: 12px;
+        min-height: 260px;
+        padding: 10px;
     }
     
     .musik-cover {
-        width: 60px;
-        height: 60px;
-        font-size: 24px;
+        width: 55px;
+        height: 55px;
+        font-size: 22px;
     }
     
-    .musik-info .song-title { font-size: 14px; }
+    .musik-info .song-title { font-size: 13px; }
     
     .musik-controls button {
-        width: 34px;
-        height: 34px;
-        font-size: 14px;
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
     }
     
     .musik-controls .btn-play {
-        width: 46px;
-        height: 46px;
-        font-size: 20px;
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
     }
 
     .game-play-container {
         flex-direction: row;
-        border-radius: 12px;
+        border-radius: 10px;
         overflow: hidden;
         height: 100%;
         max-height: 100%;
     }
     
     .game-play-sidebar {
-        width: 85px;
+        width: 70px;
         height: 100%;
         max-height: 100%;
         flex-shrink: 0;
         flex-direction: column;
         overflow-y: auto;
         overflow-x: hidden;
-        padding: 8px 4px;
-        gap: 8px;
+        padding: 6px 3px;
+        gap: 6px;
         border-right: 1px solid rgba(255,255,255,0.1);
         border-bottom: none;
     }
     
     .game-play-sidebar .sidebar-game-item {
         width: 100%;
-        padding: 6px 4px;
+        padding: 4px 3px;
         flex-shrink: 0;
     }
     
     .game-play-sidebar .sidebar-game-item .side-img {
-        width: 55px;
-        height: 55px;
-        margin-bottom: 4px;
+        width: 45px;
+        height: 45px;
+        margin-bottom: 3px;
     }
     
     .game-play-sidebar .sidebar-game-item .side-name {
-        font-size: 9px;
-        max-width: 70px;
+        font-size: 8px;
+        max-width: 55px;
     }
     
     .game-frame-container {
-        min-height: 300px;
+        min-height: 250px;
         overflow: hidden;
         height: 100%;
         max-height: 100%;
     }
     
     .about-container .about-avatar {
-        width: 90px;
-        height: 90px;
+        width: 80px;
+        height: 80px;
     }
     
-    .about-container .about-name { font-size: 20px; }
+    .about-container .about-name { font-size: 18px; }
     
     .about-container .social-links a {
-        padding: 8px 14px;
-        font-size: 12px;
+        padding: 6px 12px;
+        font-size: 11px;
     }
     
     .about-container .about-stats {
         grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
+        gap: 6px;
     }
     
-    .about-container .about-stats .stat-number { font-size: 16px; }
-    .about-container .about-bio { font-size: 13px; }
+    .about-container .about-stats .stat-number { font-size: 15px; }
+    .about-container .about-bio { font-size: 12px; }
 }
 
 /* ========================================
-   RESPONSIVE - SMALL MOBILE
+   RESPONSIVE - MOBILE KECIL (TETAP 3 KOLOM)
    ======================================== */
 @media (max-width: 480px) {
-    .game-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .game-card { padding: 8px 4px; }
-    .game-img { width: 55px; height: 55px; }
-    .game-name { font-size: 9px; }
-    .page-content { padding: 8px 8px 70px 8px; }
-    .toast-notif { bottom: 65px; font-size: 12px; padding: 8px 16px; }
-
-    .musik-playlist { max-height: 120px; }
-    
-    .musik-player-wrapper {
-        min-height: 240px;
-        padding: 10px;
+    .game-grid {
+        gap: 6px;
     }
     
-    .musik-cover {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
+    .game-card {
+        padding: 6px 3px;
+        border-radius: 10px;
+        min-height: 70px;
+        aspect-ratio: 1 / 1.1;
     }
     
-    .musik-info .song-title { font-size: 13px; }
-    
-    .musik-controls button {
-        width: 30px;
-        height: 30px;
-        font-size: 12px;
-    }
-    
-    .musik-controls .btn-play {
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
-    }
-
-    .game-frame-container { min-height: 200px; }
-    
-    .game-play-sidebar { width: 70px; }
-    
-    .game-play-sidebar .sidebar-game-item .side-img {
+    .game-img {
         width: 45px;
         height: 45px;
     }
     
-    .game-play-sidebar .sidebar-game-item .side-name {
+    .game-name {
         font-size: 8px;
-        max-width: 55px;
+        margin-top: 3px;
+    }
+    
+    .moneyjar-sticker {
+        font-size: 5px;
+        padding: 1px 2px;
+        bottom: -3px;
+        left: -3px;
+    }
+    
+    .page-content { padding: 6px 6px 60px 6px; }
+    .toast-notif { bottom: 60px; font-size: 10px; padding: 6px 12px; }
+
+    .musik-playlist { max-height: 100px; padding: 8px; }
+    
+    .musik-player-wrapper {
+        min-height: 200px;
+        padding: 8px;
+    }
+    
+    .musik-cover {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+    
+    .musik-info .song-title { font-size: 12px; }
+    
+    .musik-controls button {
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
+    }
+    
+    .musik-controls .btn-play {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+    }
+
+    .game-frame-container { min-height: 180px; }
+    
+    .game-play-sidebar { width: 60px; }
+    
+    .game-play-sidebar .sidebar-game-item .side-img {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .game-play-sidebar .sidebar-game-item .side-name {
+        font-size: 7px;
+        max-width: 45px;
+    }
+    
+    .game-frame-header .frame-title { font-size: 11px; }
+    .game-frame-header .btn-close-frame { font-size: 10px; padding: 3px 10px; }
+}
+
+@media (max-width: 360px) {
+    .game-grid {
+        gap: 5px;
+    }
+    
+    .game-card {
+        padding: 4px 2px;
+        border-radius: 8px;
+        min-height: 60px;
+        aspect-ratio: 1 / 1.05;
+    }
+    
+    .game-img {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .game-name {
+        font-size: 7px;
+        margin-top: 2px;
     }
 }
 </style>
@@ -1424,7 +1711,7 @@ body {
     <!-- ============ HEADER ============ -->
     <header class="main-header">
         <div class="logo">
-            <img src="https://i.ibb.co.com/F4zMvW25/20260712-173425.jpg" alt="SodroN" onerror="this.style.display='none'">
+            <img src="https://i.ibb.co.com/F4zMvW25/20260712-173425.jpg" alt="SodroN" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22%3E%3Crect fill=%22%23f39c12%22 width=%2240%22 height=%2240%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22 font-size=%2220%22%3ES%3C/text%3E%3C/svg%3E'">
             <span>SodroN</span>
         </div>
         <div class="header-actions">
@@ -1485,7 +1772,9 @@ body {
 
             <!-- ===== PAGE: GAMES ===== -->
             <div class="page-content" id="page-games">
-                <div class="game-grid" id="gameGridGames"></div>
+                <div class="game-grid-wrapper">
+                    <div class="game-grid" id="gameGridGames"></div>
+                </div>
 
                 <div class="game-play-container" id="gamePlayContainer">
                     <div class="game-play-sidebar" id="gamePlaySidebar"></div>
@@ -1509,7 +1798,7 @@ body {
             <div class="page-content" id="page-akun">
                 <div class="akun-container">
                     <div class="profile-card">
-                        <img class="avatar-big" id="profileAvatar" src="https://i.ibb.co.com/F4zMvW25/20260712-173425.jpg" onerror="this.style.display='none'">
+                        <img class="avatar-big" id="profileAvatar" src="https://i.ibb.co.com/F4zMvW25/20260712-173425.jpg" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23f39c12%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22 font-size=%2250%22%3ES%3C/text%3E%3C/svg%3E'">
                         <div class="nickname" id="profileNickname">SodroN</div>
                         <div class="account-badge" id="accountBadge">👑 Akun Utama</div>
                         <div class="input-group">
@@ -1555,7 +1844,7 @@ body {
             <div class="page-content" id="page-about">
                 <div class="about-container">
                     <div class="about-card">
-                        <img class="about-avatar" src="https://i.ibb.co.com/F4zMvW25/20260712-173425.jpg" alt="SodroN" onerror="this.style.display='none'">
+                        <img class="about-avatar" src="https://i.ibb.co.com/F4zMvW25/20260712-173425.jpg" alt="SodroN" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23f39c12%22 width=%22120%22 height=%22120%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22 font-size=%2260%22%3ES%3C/text%3E%3C/svg%3E'">
                         <div class="about-name">SodroN</div>
                         <div class="about-role">🚀 Web Enthusiast & Gamer</div>
 
@@ -1713,62 +2002,61 @@ body {
 
     <script>
         // ============ DATA GAME ============
-// ============ DATA GAME ============
-const ALL_GAMES = [
-    // === GAME UTAMA ===
-    { n: "Mahjong Ways", img: "https://i.ibb.co.com/xSX4Gshj/image-c3be9824.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/55?" },
-    { n: "Racing Car", img: "https://i.ibb.co.com/0jVVsPpK/image-291941ed.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=speed_racing&", moneyjar: true },
-    { n: "Yummy Slots", img: "https://i.ibb.co.com/93YBy8dD/image-6f232e98.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?mode=games&game_name=yammy_slots&", moneyjar: true },
-    { n: "Poker Ace", img: "https://i.ibb.co.com/TqYmvxjm/image-6095cb4d.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/52?" },
-    { n: "Jungle Hunt", img: "https://i.ibb.co.com/bt8fpVJ/image-9e8e69df.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/827?isHalf=false&heightRatio=1&gameMaker=2" },
-    { n: "Ocean Hunt", img: "https://i.ibb.co.com/4ZdLx931/image-be4a4065.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/828?isHalf=false&heightRatio=1&gameMaker=2" },
-    { n: "Super Ace", img: "https://i.ibb.co.com/S43wwsc1/image-3096ca0.png", u: "https://www.duolefast.com/common-web/full/game1015/1.1.3/web-mobile/index.html?bizAppId=100049&gameid=1200013&engameid=1015&isHalf=false&heightRatio=1&gameMaker=2" },
-    { n: "MegaJackpot", img: "https://i.ibb.co.com/99ss7rWM/image-1c20034.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/62?" },
-    { n: "Lucky Gem", img: "https://i.ibb.co.com/cSzPymHW/image-af0c016a.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=fortune_gems&", moneyjar: true },
-    { n: "King Of Olympus", img: "https://i.ibb.co.com/8nDVwzmx/image-adbf1924.png", u: "https://cdn-xoon.leadercc.com/games/gatesOfOlympus/index.html?" },
-    { n: "Bandito", img: "https://i.ibb.co.com/4nyzcVkH/image-78c04432.png", u: "https://www.duolefast.com/common-web/full/game1026/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200008&engameid=1026&" },
-    { n: "CrazyGems", img: "https://i.ibb.co.com/QvJ098ct/image-5b088966.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/43?" },
-    { n: "Treasure", img: "https://i.ibb.co.com/WWGsqCRm/image-a3e85944.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=deep_sea_treasures&", moneyjar: true },
-    { n: "Gates Of Hades", img: "https://i.ibb.co.com/Pvxg0wHj/image-76501474.png", u: "https://www.duolefast.com/common-web/full/game1029/1.1.3/web-mobile/index.html?bizAppId=100049&gameid=1200014&engameid=1029&isHalf=false&heightRatio=1&gameMaker=2" },
-    { n: "Emperor", img: "https://i.ibb.co.com/Jw4ZtC07/image-eea8fc8c.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/48?" },
-    { n: "Fishing I", img: "https://i.ibb.co.com/hSmDTJQ/image-2ee7d78b.png", u: "https://d1wtralw2m821s.cloudfront.net/games/fish6/index.html?mode=games&game_name=fish6&isHalf=false&game_id=104&", moneyjar: true },
-    { n: "Mahjong Ways II", img: "https://i.ibb.co.com/b58gmwKX/image-8cbe9cc0.png", u: "https://www.duolefast.com/common-web/full/game1009/1.0.4/web-mobile/index.html?bizAppId=100049&gameid=1200006&engameid=1009&" },
-    { n: "Olympus II", img: "https://i.ibb.co.com/jZ3KpQf0/image-9439adea.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/27?" },
-    { n: "Sweet Bonanza", img: "https://i.ibb.co.com/kv9CP9k/image-2149c8f.png", u: "https://d1wtralw2m821s.cloudfront.net/games/sweet_feast/index.html?mode=games&game_name=sweet_feast&isHalf=false&game_id=106", moneyjar: true },
-    { n: "Lucky Slot", img: "https://i.ibb.co.com/Q7VwwgVB/image-4596ad14.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=luckyslots&" },
-    { n: "World Goal", img: "https://i.ibb.co.com/pBY0QpB4/image-26e69896.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/284?isHalf=false&heightRatio=1&gameMaker=2" },
-    { n: "Fortune Pot", img: "https://i.ibb.co.com/F48MCD5b/image-c442ea28.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/560?isHalf=false&heightRatio=1&gameMaker=2" },
-    { n: "WealthyTiger", img: "https://i.ibb.co.com/60dY6bHK/image-9169f717.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/60?" },
-    { n: "Greedy Monkey", img: "https://i.ibb.co.com/hFrqjVym/image-1a720f12.png", u: "https://d1wtralw2m821s.cloudfront.net/games/monkey_wheel/index.html?" },
-    { n: "Monkey King II", img: "https://i.ibb.co.com/5hmGg12W/image-201fbf0f.png", u: "https://www.duolefast.com/common-web/full/game1014/1.0.4/web-mobile/index.html?bizAppId=100049&gameid=1200007&engameid=1014&isHalf=false&heightRatio=1&gameMaker=2" },
-    { n: "Pirate King 2", img: "https://i.ibb.co.com/fZqbjvP/image-fc213f52.png", u: "https://d1wtralw2m821s.cloudfront.net/games/pirate_king/index.html?pl=xoon&v=11&isHalf=false&game_id=136&" },
-    { n: "Sweet Sugar", img: "https://i.ibb.co.com/1GWWGGVj/image-f55e69e0.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/41?" },
-    { n: "Greedy Lion II", img: "https://i.ibb.co.com/452fkdb/image-c721045.png", u: "https://www.duolefast.com/common-web/full/game853/1.1.3/web-mobile/index.html?bizAppId=100049&gameid=1200012&engameid=853&isHalf=false&heightRatio=1&gameMaker=2" },
-    { n: "Monkey King I", img: "https://i.ibb.co.com/GYFL4sG/image-daf45e7f.png", u: "https://d1wtralw2m821s.cloudfront.net/games/monkeyking/index.html?pl=xoon&v=11&mode=games&game_name=monkeyking&isHalf=false&heightRatio=1&gameMaker=2&game_id=128" },
-    { n: "Original 777", img: "https://i.ibb.co.com/QFYgB2Wd/image-46f6aacb.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/57?" },
-    { n: "MAHJONG II", img: "https://i.ibb.co.com/GQp31hwC/image-2071d400.png", u: "https://api.osgametheme.com/plug_new/theme7/xoon_full?isHalf=false&heightRatio=1&gameMaker=2", moneyjar: true },
-    { n: "Lucky 777", img: "https://i.ibb.co.com/ccN427rz/image-844094.png", u: "https://d1wtralw2m821s.cloudfront.net/games/lucky777/index.html?" },
-    { n: "King of Olympus II", img: "https://i.ibb.co.com/SXJJ748s/image-5a904193.png", u: "https://www.duolefast.com/common-web/full/game1000/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200005&engameid=1000&isHalf=false&heightRatio=1&gameMaker=2" },
-    { n: "Book of Death", img: "https://i.ibb.co.com/kzfyCKk/image-ca21281f.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/63?" },
-    { n: "LuckyPig", img: "https://i.ibb.co.com/HTGTWtns/image-86adbd02.png", u: "https://www.duolefast.com/common-web/full/game1017/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200002&engameid=1017&" },
-    { n: "Big Hammer", img: "https://i.ibb.co.com/VWK2Py3f/image-35f096ca.png", u: "https://cdn-xoon.leadercc.com/games/big_hammer/", moneyjar: true },
-    { n: "Mr Rich", img: "https://i.ibb.co.com/PshtqbWD/image-f646294c.png", u: "https://d1wtralw2m821s.cloudfront.net/games/mrrich/index.html?pl=xoon&v=11&mode=games&game_name=mrrich&isHalf=false&game_id=129&" },
-    { n: "Showdown", img: "https://i.ibb.co.com/FqYRw3p0/image-748da0e4.png", u: "https://www.duolefast.com/common-web/full/game1024/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200003&engameid=1024&" },
-    { n: "Deep Sea", img: "https://i.ibb.co.com/Qvh455Zx/image-f5af3b5a.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=deep_sea_fish&" },
+        const ALL_GAMES = [
+            // === GAME UTAMA ===
+            { n: "Mahjong Ways", img: "https://i.ibb.co.com/xSX4Gshj/image-c3be9824.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/55?" },
+            { n: "Racing Car", img: "https://i.ibb.co.com/0jVVsPpK/image-291941ed.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=speed_racing&", moneyjar: true },
+            { n: "Yummy Slots", img: "https://i.ibb.co.com/93YBy8dD/image-6f232e98.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?mode=games&game_name=yammy_slots&", moneyjar: true },
+            { n: "Poker Ace", img: "https://i.ibb.co.com/TqYmvxjm/image-6095cb4d.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/52?" },
+            { n: "Jungle Hunt", img: "https://i.ibb.co.com/bt8fpVJ/image-9e8e69df.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/827?isHalf=false&heightRatio=1&gameMaker=2" },
+            { n: "Ocean Hunt", img: "https://i.ibb.co.com/4ZdLx931/image-be4a4065.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/828?isHalf=false&heightRatio=1&gameMaker=2" },
+            { n: "Super Ace", img: "https://i.ibb.co.com/S43wwsc1/image-3096ca0.png", u: "https://www.duolefast.com/common-web/full/game1015/1.1.3/web-mobile/index.html?bizAppId=100049&gameid=1200013&engameid=1015&isHalf=false&heightRatio=1&gameMaker=2" },
+            { n: "MegaJackpot", img: "https://i.ibb.co.com/99ss7rWM/image-1c20034.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/62?" },
+            { n: "Lucky Gem", img: "https://i.ibb.co.com/cSzPymHW/image-af0c016a.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=fortune_gems&", moneyjar: true },
+            { n: "King Of Olympus", img: "https://i.ibb.co.com/8nDVwzmx/image-adbf1924.png", u: "https://cdn-xoon.leadercc.com/games/gatesOfOlympus/index.html?" },
+            { n: "Bandito", img: "https://i.ibb.co.com/4nyzcVkH/image-78c04432.png", u: "https://www.duolefast.com/common-web/full/game1026/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200008&engameid=1026&" },
+            { n: "CrazyGems", img: "https://i.ibb.co.com/QvJ098ct/image-5b088966.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/43?" },
+            { n: "Treasure", img: "https://i.ibb.co.com/WWGsqCRm/image-a3e85944.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=deep_sea_treasures&", moneyjar: true },
+            { n: "Gates Of Hades", img: "https://i.ibb.co.com/Pvxg0wHj/image-76501474.png", u: "https://www.duolefast.com/common-web/full/game1029/1.1.3/web-mobile/index.html?bizAppId=100049&gameid=1200014&engameid=1029&isHalf=false&heightRatio=1&gameMaker=2" },
+            { n: "Emperor", img: "https://i.ibb.co.com/Jw4ZtC07/image-eea8fc8c.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/48?" },
+            { n: "Fishing I", img: "https://i.ibb.co.com/hSmDTJQ/image-2ee7d78b.png", u: "https://d1wtralw2m821s.cloudfront.net/games/fish6/index.html?mode=games&game_name=fish6&isHalf=false&game_id=104&", moneyjar: true },
+            { n: "Mahjong Ways II", img: "https://i.ibb.co.com/b58gmwKX/image-8cbe9cc0.png", u: "https://www.duolefast.com/common-web/full/game1009/1.0.4/web-mobile/index.html?bizAppId=100049&gameid=1200006&engameid=1009&" },
+            { n: "Olympus II", img: "https://i.ibb.co.com/jZ3KpQf0/image-9439adea.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/27?" },
+            { n: "Sweet Bonanza", img: "https://i.ibb.co.com/kv9CP9k/image-2149c8f.png", u: "https://d1wtralw2m821s.cloudfront.net/games/sweet_feast/index.html?mode=games&game_name=sweet_feast&isHalf=false&game_id=106", moneyjar: true },
+            { n: "Lucky Slot", img: "https://i.ibb.co.com/Q7VwwgVB/image-4596ad14.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=luckyslots&" },
+            { n: "World Goal", img: "https://i.ibb.co.com/pBY0QpB4/image-26e69896.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/284?isHalf=false&heightRatio=1&gameMaker=2" },
+            { n: "Fortune Pot", img: "https://i.ibb.co.com/F48MCD5b/image-c442ea28.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/560?isHalf=false&heightRatio=1&gameMaker=2" },
+            { n: "WealthyTiger", img: "https://i.ibb.co.com/60dY6bHK/image-9169f717.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/60?" },
+            { n: "Greedy Monkey", img: "https://i.ibb.co.com/hFrqjVym/image-1a720f12.png", u: "https://d1wtralw2m821s.cloudfront.net/games/monkey_wheel/index.html?" },
+            { n: "Monkey King II", img: "https://i.ibb.co.com/5hmGg12W/image-201fbf0f.png", u: "https://www.duolefast.com/common-web/full/game1014/1.0.4/web-mobile/index.html?bizAppId=100049&gameid=1200007&engameid=1014&isHalf=false&heightRatio=1&gameMaker=2" },
+            { n: "Pirate King 2", img: "https://i.ibb.co.com/fZqbjvP/image-fc213f52.png", u: "https://d1wtralw2m821s.cloudfront.net/games/pirate_king/index.html?pl=xoon&v=11&isHalf=false&game_id=136&" },
+            { n: "Sweet Sugar", img: "https://i.ibb.co.com/1GWWGGVj/image-f55e69e0.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/41?" },
+            { n: "Greedy Lion II", img: "https://i.ibb.co.com/452fkdb/image-c721045.png", u: "https://www.duolefast.com/common-web/full/game853/1.1.3/web-mobile/index.html?bizAppId=100049&gameid=1200012&engameid=853&isHalf=false&heightRatio=1&gameMaker=2" },
+            { n: "Monkey King I", img: "https://i.ibb.co.com/GYFL4sG/image-daf45e7f.png", u: "https://d1wtralw2m821s.cloudfront.net/games/monkeyking/index.html?pl=xoon&v=11&mode=games&game_name=monkeyking&isHalf=false&heightRatio=1&gameMaker=2&game_id=128" },
+            { n: "Original 777", img: "https://i.ibb.co.com/QFYgB2Wd/image-46f6aacb.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/57?" },
+            { n: "MAHJONG II", img: "https://i.ibb.co.com/GQp31hwC/image-2071d400.png", u: "https://api.osgametheme.com/plug_new/theme7/xoon_full?isHalf=false&heightRatio=1&gameMaker=2", moneyjar: true },
+            { n: "Lucky 777", img: "https://i.ibb.co.com/ccN427rz/image-844094.png", u: "https://d1wtralw2m821s.cloudfront.net/games/lucky777/index.html?" },
+            { n: "King of Olympus II", img: "https://i.ibb.co.com/SXJJ748s/image-5a904193.png", u: "https://www.duolefast.com/common-web/full/game1000/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200005&engameid=1000&isHalf=false&heightRatio=1&gameMaker=2" },
+            { n: "Book of Death", img: "https://i.ibb.co.com/kzfyCKk/image-ca21281f.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/63?" },
+            { n: "LuckyPig", img: "https://i.ibb.co.com/HTGTWtns/image-86adbd02.png", u: "https://www.duolefast.com/common-web/full/game1017/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200002&engameid=1017&" },
+            { n: "Big Hammer", img: "https://i.ibb.co.com/VWK2Py3f/image-35f096ca.png", u: "https://cdn-xoon.leadercc.com/games/big_hammer/", moneyjar: true },
+            { n: "Mr Rich", img: "https://i.ibb.co.com/PshtqbWD/image-f646294c.png", u: "https://d1wtralw2m821s.cloudfront.net/games/mrrich/index.html?pl=xoon&v=11&mode=games&game_name=mrrich&isHalf=false&game_id=129&" },
+            { n: "Showdown", img: "https://i.ibb.co.com/FqYRw3p0/image-748da0e4.png", u: "https://www.duolefast.com/common-web/full/game1024/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200003&engameid=1024&" },
+            { n: "Deep Sea", img: "https://i.ibb.co.com/Qvh455Zx/image-f5af3b5a.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=deep_sea_fish&" },
 
-    // === GAME TERHAPUS ===
-    { n: "❌ Gold Tree (Game Terhapus)", img: "https://i.ibb.co.com/Qv03qzgK/image-876895c5.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/561?isHalf=false&heightRatio=1&gameMaker=2", moneyjar: false },
-    { n: "❌ Futebol Fever (Game Terhapus)", img: "https://i.ibb.co.com/kgSKDd1x/image-1a47e78.png", u: "https://www.duolefast.com/common-web/vert/game1028/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200009&engameid=1028&heightRatio=0.7&", moneyjar: false },
-    { n: "❌ Major Bass (Game Terhapus)", img: "https://i.ibb.co.com/b5DsSk96/image-47eb5477.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/562?isHalf=false&heightRatio=1&gameMaker=2", moneyjar: false },
-    { n: "❌ Jammin Jars (Game Terhapus)", img: "https://i.ibb.co.com/cK1Jvw07/image-9cd6d73d.png", u: "https://www.duolefast.com/common-web/full/game1016/1.0.1/web-mobile/index.html?bizAppId=100049&gameid=1200010&engameid=1016&", moneyjar: false },
-    { n: "❌ Golden Tree (Game Terhapus)", img: "https://i.ibb.co.com/JfJHT9T/image-25ae0677.png", u: "https://api.osgametheme.com/plug_new/theme37/xoon_full?", moneyjar: false },
-    { n: "❌ Aztec (Game Terhapus)", img: "https://i.ibb.co.com/MyLSy6qz/image-e53a217c.png", u: "https://www.duolefast.com/common-web/full/game1006/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200001&engameid=1006&", moneyjar: false },
-    { n: "❌ GradyKing (Game Terhapus)", img: "https://i.ibb.co.com/Q70MPxms/image-e9fc13ca.png", u: "https://www.duolefast.com/common-web/full/game845/", moneyjar: false },
-    { n: "❌ Fishing II (Game Terhapus)", img: "https://i.ibb.co.com/gL76WH2F/image-4687926a.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/128?", moneyjar: false },
-    { n: "❌ Fruit Flash (Game Terhapus)", img: "https://i.ibb.co.com/fGSqdbLn/image-42557977.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/35?", moneyjar: false },
-    { n: "❌ Crazy Treasure (Game Terhapus)", img: "https://i.ibb.co.com/svCsCCyt/image-89696056.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/559?isHalf=false&heightRatio=1&gameMaker=2", moneyjar: false },
-    { n: "❌ Gold Miner (Game Terhapus)", img: "https://i.ibb.co.com/v4HfF5Y9/image-3d71e7f3.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/53?", moneyjar: false }
-];  
+            // === GAME TERHAPUS ===
+            { n: "❌ Gold Tree (Game Terhapus)", img: "https://i.ibb.co.com/Qv03qzgK/image-876895c5.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/561?isHalf=false&heightRatio=1&gameMaker=2", moneyjar: false },
+            { n: "❌ Futebol Fever (Game Terhapus)", img: "https://i.ibb.co.com/kgSKDd1x/image-1a47e78.png", u: "https://www.duolefast.com/common-web/vert/game1028/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200009&engameid=1028&heightRatio=0.7&", moneyjar: false },
+            { n: "❌ Major Bass (Game Terhapus)", img: "https://i.ibb.co.com/b5DsSk96/image-47eb5477.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/562?isHalf=false&heightRatio=1&gameMaker=2", moneyjar: false },
+            { n: "❌ Jammin Jars (Game Terhapus)", img: "https://i.ibb.co.com/cK1Jvw07/image-9cd6d73d.png", u: "https://www.duolefast.com/common-web/full/game1016/1.0.1/web-mobile/index.html?bizAppId=100049&gameid=1200010&engameid=1016&", moneyjar: false },
+            { n: "❌ Golden Tree (Game Terhapus)", img: "https://i.ibb.co.com/JfJHT9T/image-25ae0677.png", u: "https://api.osgametheme.com/plug_new/theme37/xoon_full?", moneyjar: false },
+            { n: "❌ Aztec (Game Terhapus)", img: "https://i.ibb.co.com/MyLSy6qz/image-e53a217c.png", u: "https://www.duolefast.com/common-web/full/game1006/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200001&engameid=1006&", moneyjar: false },
+            { n: "❌ GradyKing (Game Terhapus)", img: "https://i.ibb.co.com/Q70MPxms/image-e9fc13ca.png", u: "https://www.duolefast.com/common-web/full/game845/", moneyjar: false },
+            { n: "❌ Fishing II (Game Terhapus)", img: "https://i.ibb.co.com/gL76WH2F/image-4687926a.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/128?", moneyjar: false },
+            { n: "❌ Fruit Flash (Game Terhapus)", img: "https://i.ibb.co.com/fGSqdbLn/image-42557977.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/35?", moneyjar: false },
+            { n: "❌ Crazy Treasure (Game Terhapus)", img: "https://i.ibb.co.com/svCsCCyt/image-89696056.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/559?isHalf=false&heightRatio=1&gameMaker=2", moneyjar: false },
+            { n: "❌ Gold Miner (Game Terhapus)", img: "https://i.ibb.co.com/v4HfF5Y9/image-3d71e7f3.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/53?", moneyjar: false }
+        ];  
 
         // ============ DATA PLAYLIST ============
         const PLAYLIST = [
@@ -1791,6 +2079,7 @@ const ALL_GAMES = [
         let isRepeat = false;
         let widget = null;
         let widgetReady = false;
+        let isSoundCloudLoaded = false;
 
         function updatePlayButton() {
             const btn = document.getElementById('btnPlay');
@@ -1835,6 +2124,7 @@ const ALL_GAMES = [
             ];
             const c = colors[index % colors.length];
             cover.style.background = `linear-gradient(135deg, ${c[0]}, ${c[1]})`;
+            cover.textContent = '🎵';
 
             widgetReady = false;
             const iframe = document.getElementById('musikFrame');
@@ -1842,50 +2132,27 @@ const ALL_GAMES = [
             if (song.url) {
                 iframe.src = song.url;
                 
-                iframe.onload = function() {
-                    setTimeout(function() {
-                        if (typeof SC !== 'undefined' && SC.Widget) {
-                            widget = null;
-                            widget = SC.Widget(iframe);
-                            
-                            widget.bind(SC.Widget.Events.READY, function() {
-                                widgetReady = true;
-                                console.log('🎵 Widget Ready: ' + song.name);
-                                if (isPlaying) {
-                                    widget.play();
+                let checkInterval = setInterval(() => {
+                    if (iframe.contentWindow) {
+                        clearInterval(checkInterval);
+                        setTimeout(() => {
+                            if (typeof SC !== 'undefined' && SC.Widget) {
+                                try {
+                                    initSoundCloudWidget();
+                                } catch(e) {
+                                    console.warn('⚠️ Gagal bind widget:', e);
+                                    loadSoundCloudAPI();
                                 }
-                            });
-                            
-                            widget.bind(SC.Widget.Events.PLAY, function() {
-                                isPlaying = true;
-                                updatePlayButton();
-                                document.querySelectorAll('.playlist-item').forEach((el, i) => {
-                                    el.classList.toggle('playing', i === currentSongIndex);
-                                });
-                            });
+                            } else {
+                                loadSoundCloudAPI();
+                            }
+                        }, 500);
+                    }
+                }, 100);
 
-                            widget.bind(SC.Widget.Events.PAUSE, function() {
-                                isPlaying = false;
-                                updatePlayButton();
-                                document.querySelectorAll('.playlist-item').forEach(el => el.classList.remove('playing'));
-                            });
-
-                            widget.bind(SC.Widget.Events.FINISH, function() {
-                                if (isRepeat) {
-                                    widget.play();
-                                } else {
-                                    nextSong();
-                                }
-                            });
-
-                            widget.bind(SC.Widget.Events.ERROR, function(e) {
-                                console.log('⚠️ SoundCloud error:', e);
-                            });
-                        } else {
-                            loadSoundCloudAPI();
-                        }
-                    }, 500);
-                };
+                setTimeout(() => {
+                    clearInterval(checkInterval);
+                }, 5000);
             }
         }
 
@@ -1971,7 +2238,89 @@ const ALL_GAMES = [
             showToast(isRepeat ? '🔁 Repeat ON' : '🔁 Repeat OFF');
         }
 
-        // ============ RENDER PLAYLIST ============
+        function loadSoundCloudAPI() {
+            if (isSoundCloudLoaded) return;
+            
+            if (typeof SC !== 'undefined' && SC.Widget) {
+                isSoundCloudLoaded = true;
+                initSoundCloudWidget();
+                return;
+            }
+
+            if (document.querySelector('script[src*="soundcloud.com/player/api.js"]')) {
+                setTimeout(() => {
+                    if (typeof SC !== 'undefined' && SC.Widget) {
+                        isSoundCloudLoaded = true;
+                        initSoundCloudWidget();
+                    } else {
+                        console.warn('⚠️ SoundCloud API gagal dimuat');
+                        showToast('⚠️ Gagal memuat pemutar musik');
+                    }
+                }, 1500);
+                return;
+            }
+            
+            const script = document.createElement('script');
+            script.src = 'https://w.soundcloud.com/player/api.js';
+            script.onload = function() {
+                console.log('🎵 SoundCloud API Loaded');
+                isSoundCloudLoaded = true;
+                initSoundCloudWidget();
+            };
+            script.onerror = function() {
+                console.error('❌ Gagal memuat SoundCloud API');
+                showToast('❌ Gagal memuat pemutar musik');
+            };
+            document.head.appendChild(script);
+        }
+
+        function initSoundCloudWidget() {
+            const iframe = document.getElementById('musikFrame');
+            if (!iframe || !iframe.src || iframe.src === 'about:blank') return;
+            
+            try {
+                widget = SC.Widget(iframe);
+                widget.bind(SC.Widget.Events.READY, function() {
+                    widgetReady = true;
+                    console.log('✅ Widget siap');
+                    if (isPlaying) {
+                        widget.play();
+                    }
+                });
+                
+                widget.bind(SC.Widget.Events.PLAY, function() {
+                    isPlaying = true;
+                    updatePlayButton();
+                    document.querySelectorAll('.playlist-item').forEach((el, i) => {
+                        el.classList.toggle('playing', i === currentSongIndex);
+                    });
+                });
+
+                widget.bind(SC.Widget.Events.PAUSE, function() {
+                    isPlaying = false;
+                    updatePlayButton();
+                    document.querySelectorAll('.playlist-item').forEach(el => el.classList.remove('playing'));
+                });
+
+                widget.bind(SC.Widget.Events.FINISH, function() {
+                    if (isRepeat) {
+                        widget.play();
+                    } else {
+                        nextSong();
+                    }
+                });
+
+                widget.bind(SC.Widget.Events.ERROR, function(e) {
+                    console.error('⚠️ SoundCloud error:', e);
+                    showToast('⚠️ Error pemutar musik');
+                });
+            } catch(e) {
+                console.error('❌ Error init widget:', e);
+                isSoundCloudLoaded = false;
+                loadSoundCloudAPI();
+            }
+        }
+
         function renderPlaylist() {
             const container = document.getElementById('musikPlaylist');
             if (!container) return;
@@ -2012,42 +2361,7 @@ const ALL_GAMES = [
             }
         }
 
-        // ============ LOAD SOUNDCLOUD API ============
-        function loadSoundCloudAPI() {
-            if (document.querySelector('script[src*="soundcloud.com/api.js"]')) {
-                setTimeout(function() {
-                    if (typeof SC !== 'undefined' && SC.Widget) {
-                        const iframe = document.getElementById('musikFrame');
-                        widget = SC.Widget(iframe);
-                        widget.bind(SC.Widget.Events.READY, function() {
-                            widgetReady = true;
-                            if (isPlaying) widget.play();
-                        });
-                    }
-                }, 300);
-                return;
-            }
-            
-            const script = document.createElement('script');
-            script.src = 'https://w.soundcloud.com/player/api.js';
-            script.onload = function() {
-                console.log('🎵 SoundCloud API Loaded');
-                const iframe = document.getElementById('musikFrame');
-                if (iframe.src) {
-                    setTimeout(function() {
-                        widget = SC.Widget(iframe);
-                        widget.bind(SC.Widget.Events.READY, function() {
-                            widgetReady = true;
-                            if (isPlaying) widget.play();
-                        });
-                    }, 500);
-                }
-            };
-            document.head.appendChild(script);
-        }
-
         // ============ KONFIGURASI AKUN ============
-        // Default akun SodroN
         const DEFAULT_ACCOUNT = {
             uid: '1756457056973000156',
             token: 'update-MyToken',
@@ -2057,7 +2371,6 @@ const ALL_GAMES = [
             isDefault: true
         };
 
-        // Akun Tamu
         const GUEST_ACCOUNT = {
             uid: '1755883510169011759',
             token: 'nc9r4BmxIAhGGHY2MyC',
@@ -2075,7 +2388,9 @@ const ALL_GAMES = [
                 try {
                     let parsed = JSON.parse(saved);
                     ACCOUNT = parsed;
-                } catch(e) {}
+                } catch(e) {
+                    console.warn('Gagal load akun, menggunakan default');
+                }
             }
             updateProfileDisplay();
         }
@@ -2111,7 +2426,6 @@ const ALL_GAMES = [
                 return;
             }
             
-            // Keep current UID, only update token
             ACCOUNT.token = token;
             ACCOUNT.isGuest = false;
             ACCOUNT.isDefault = false;
@@ -2157,7 +2471,6 @@ const ALL_GAMES = [
             return `uid=${ACCOUNT.uid}&token=${ACCOUNT.token}&nickname=${encodeURIComponent(ACCOUNT.nickname)}&avatar=${encodeURIComponent(ACCOUNT.avatar)}`;
         }
 
-        // ============ RENDER GAME GRID ============
         function renderGameGrid(containerId) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -2170,7 +2483,7 @@ const ALL_GAMES = [
                 card.innerHTML = `
                     <div class="game-img">
                         ${stickerHtml}
-                        <img src="${game.img}" onerror="this.src='https://via.placeholder.com/70?text=No'">
+                        <img src="${game.img}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect fill=%22%23333%22 width=%2270%22 height=%2270%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23f39c12%22 font-size=%2220%22%3E🎮%3C/text%3E%3C/svg%3E'">
                     </div>
                     <div class="game-name">${game.n}</div>
                 `;
@@ -2181,7 +2494,6 @@ const ALL_GAMES = [
             }
         }
 
-        // ============ RENDER SIDEBAR GAME ============
         function renderGameSidebar(activeGame) {
             const sidebar = document.getElementById('gamePlaySidebar');
             if (!sidebar) return;
@@ -2196,7 +2508,7 @@ const ALL_GAMES = [
                 }
 
                 item.innerHTML = `
-                    <img class="side-img" src="${game.img}" onerror="this.src='https://via.placeholder.com/55?text=No'">
+                    <img class="side-img" src="${game.img}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2255%22 height=%2255%22%3E%3Crect fill=%22%23333%22 width=%2255%22 height=%2255%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23f39c12%22 font-size=%2216%22%3E🎮%3C/text%3E%3C/svg%3E'">
                     <div class="side-name">${game.n}</div>
                 `;
 
@@ -2208,7 +2520,6 @@ const ALL_GAMES = [
             }
         }
 
-        // ============ OPEN GAME ============
         const gameFrame = document.getElementById('gameFrame');
         const gamePlayContainer = document.getElementById('gamePlayContainer');
         const gameGrid = document.getElementById('gameGridGames');
@@ -2241,17 +2552,26 @@ const ALL_GAMES = [
             gameFrameLoading.classList.remove('hidden');
 
             gameFrame.src = 'about:blank';
+            
             setTimeout(() => {
                 gameFrame.src = url;
-            }, 100);
+            }, 300);
+
+            let loadTimeout = setTimeout(() => {
+                gameFrameLoading.classList.add('hidden');
+                showToast('⚠️ Game mungkin membutuhkan waktu lebih lama');
+            }, 10000);
 
             gameFrame.onload = function() {
+                clearTimeout(loadTimeout);
                 gameFrameLoading.classList.add('hidden');
             };
 
-            setTimeout(() => {
+            gameFrame.onerror = function() {
+                clearTimeout(loadTimeout);
                 gameFrameLoading.classList.add('hidden');
-            }, 8000);
+                showToast('❌ Gagal memuat game');
+            };
 
             scrollToGame();
         }
@@ -2260,9 +2580,9 @@ const ALL_GAMES = [
             gamePlayContainer.classList.remove('active');
             gameFrame.src = 'about:blank';
             gameGrid.classList.remove('hidden');
+            gameFrameLoading.classList.add('hidden');
         }
 
-        // ============ OPEN XOON.LIVE ============
         function openXoon() {
             gameGrid.classList.add('hidden');
             gamePlayContainer.classList.add('active');
@@ -2272,17 +2592,25 @@ const ALL_GAMES = [
             gameFrameLoading.classList.remove('hidden');
 
             gameFrame.src = 'about:blank';
+            
             setTimeout(() => {
                 gameFrame.src = 'https://xoon.live';
-            }, 100);
+            }, 300);
+
+            let loadTimeout = setTimeout(() => {
+                gameFrameLoading.classList.add('hidden');
+            }, 8000);
 
             gameFrame.onload = function() {
+                clearTimeout(loadTimeout);
                 gameFrameLoading.classList.add('hidden');
             };
 
-            setTimeout(() => {
+            gameFrame.onerror = function() {
+                clearTimeout(loadTimeout);
                 gameFrameLoading.classList.add('hidden');
-            }, 8000);
+                showToast('❌ Gagal membuka Xoon.live');
+            };
 
             if (currentTab !== 'games') {
                 switchTab('games');
@@ -2291,16 +2619,16 @@ const ALL_GAMES = [
             scrollToGame();
         }
 
-        // ============ TOAST ============
         function showToast(msg) {
             let t = document.createElement('div');
             t.className = 'toast-notif';
-            t.innerHTML = msg;
+            t.textContent = msg;
             document.body.appendChild(t);
-            setTimeout(() => t.remove(), 2500);
+            setTimeout(() => {
+                if (t.parentNode) t.remove();
+            }, 2500);
         }
 
-        // ============ SWITCH TAB ============
         let currentTab = 'musik';
 
         function switchTab(tab) {
@@ -2330,7 +2658,6 @@ const ALL_GAMES = [
             }
         }
 
-        // ============ KEYBOARD SHORTCUT ============
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeGameFrame();
@@ -2349,7 +2676,6 @@ const ALL_GAMES = [
             }
         });
 
-        // ============ UPDATE ABOUT STATS ============
         function updateAboutStats() {
             document.getElementById('totalGames').textContent = ALL_GAMES.length;
             document.getElementById('totalSongs').textContent = PLAYLIST.length;
@@ -2365,7 +2691,9 @@ const ALL_GAMES = [
             loadSong(0);
         }
 
-        loadSoundCloudAPI();
+        setTimeout(() => {
+            loadSoundCloudAPI();
+        }, 1000);
 
         console.log('🚀 SodroN Loaded!');
         console.log('📌 Total Games:', ALL_GAMES.length);
@@ -2373,7 +2701,8 @@ const ALL_GAMES = [
         console.log('📌 Shortcut: Space (Play/Pause), Arrow Left/Right (Prev/Next)');
         console.log('📌 Kredit: Semua game dari Xoon.live');
         console.log('👤 Akun saat ini:', ACCOUNT.nickname);
+        console.log('📱 Website siap digunakan!');
     </script>
 
 </body>
-    </html>
+</html>
