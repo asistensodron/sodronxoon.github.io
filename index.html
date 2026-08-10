@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SodroN</title>
     <style> 
-    /* ========================================
+/* ========================================
    RESET & BASE
    ======================================== */
 * {
@@ -135,7 +135,7 @@ body {
 .desktop-tabs {
     display: flex;
     background: rgba(20, 25, 45, 0.4);
-    padding: 0 20px;
+    padding: 0 16px;
     border-bottom: 1px solid rgba(255,255,255,0.05);
     position: fixed;
     top: 72px;
@@ -150,9 +150,9 @@ body {
 .desktop-tabs .tab-btn {
     background: none;
     border: none;
-    padding: 14px 24px;
+    padding: 14px 18px;
     color: rgba(255,255,255,0.5);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     cursor: pointer;
     transition: 0.2s;
@@ -225,12 +225,264 @@ body {
 }
 
 /* ========================================
-   GAME GRID - 3 KOLOM RAPI (FIX TOTAL)
+   GAMES PAGE - SLIDE BANNER
    ======================================== */
-#page-games {
-    padding: 10px 10px 80px 10px !important;
+.games-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 4px;
 }
 
+.games-slider {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 16px auto;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 6 / 2;
+    background: rgba(25, 32, 55, 0.5);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.games-slider .slide-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.games-slider .slide-item {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    background: rgba(25, 32, 55, 0.3);
+}
+
+.games-slider .slide-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: rgba(0,0,0,0.3);
+}
+
+.games-slider .slide-item .slide-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 20px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    text-align: center;
+}
+
+.games-slider .slide-item .slide-overlay .slide-title {
+    font-size: 16px;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.games-slider .slide-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 5;
+}
+
+.games-slider .slide-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.games-slider .slide-dots .dot.active {
+    background: #f39c12;
+    width: 20px;
+    border-radius: 4px;
+}
+
+/* ========================================
+   GAMES - FAVORITE
+   ======================================== */
+.games-favorite {
+    background: rgba(25, 32, 55, 0.5);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.games-favorite .fav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.games-favorite .fav-header h3 {
+    font-size: 14px;
+    color: #f39c12;
+}
+
+.games-favorite .fav-header .fav-badge {
+    font-size: 10px;
+    opacity: 0.5;
+}
+
+.games-favorite .fav-list {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.games-favorite .fav-list::-webkit-scrollbar {
+    height: 3px;
+}
+
+.games-favorite .fav-list::-webkit-scrollbar-thumb {
+    background: #f39c12;
+    border-radius: 10px;
+}
+
+.games-favorite .fav-item {
+    flex-shrink: 0;
+    width: 70px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.15s;
+    padding: 4px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    position: relative;
+}
+
+.games-favorite .fav-item:hover {
+    background: rgba(255,255,255,0.08);
+    transform: scale(1.05);
+}
+
+.games-favorite .fav-item:active {
+    transform: scale(0.95);
+}
+
+.games-favorite .fav-item .fav-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin: 0 auto 4px;
+    display: block;
+    border: 2px solid rgba(243, 156, 18, 0.2);
+}
+
+.games-favorite .fav-item .fav-rank {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #f39c12;
+    color: #0a0a1a;
+    font-size: 8px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.games-favorite .fav-item .fav-name {
+    font-size: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60px;
+    opacity: 0.7;
+}
+
+.games-favorite .fav-item .fav-count {
+    font-size: 7px;
+    opacity: 0.4;
+}
+
+.games-favorite .fav-empty {
+    text-align: center;
+    padding: 16px;
+    opacity: 0.4;
+    font-size: 13px;
+}
+
+/* ========================================
+   GAMES - SERVER MENU
+   ======================================== */
+.games-servers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.games-servers .server-btn {
+    background: rgba(25, 32, 55, 0.6);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 14px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.games-servers .server-btn:hover {
+    background: rgba(243, 156, 18, 0.15);
+    border-color: rgba(243, 156, 18, 0.3);
+    transform: scale(1.03);
+}
+
+.games-servers .server-btn:active {
+    transform: scale(0.95);
+}
+
+.games-servers .server-btn .server-icon {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.games-servers .server-btn .server-name {
+    font-size: 11px;
+}
+
+.games-servers .server-btn .server-count {
+    font-size: 9px;
+    opacity: 0.4;
+    margin-top: 2px;
+}
+
+.games-servers .server-btn.active {
+    border-color: rgba(243, 156, 18, 0.4);
+    background: rgba(243, 156, 18, 0.15);
+}
+
+/* ========================================
+   GAME GRID
+   ======================================== */
 .game-grid-wrapper {
     width: 100%;
     max-width: 480px;
@@ -323,165 +575,7 @@ body {
 }
 
 /* ========================================
-   RESPONSIVE
-   ======================================== */
-/* Desktop */
-@media (min-width: 769px) {
-    .game-grid-wrapper {
-        max-width: 480px;
-    }
-    
-    .game-grid {
-        gap: 10px;
-    }
-    
-    .game-card {
-        max-width: 148px;
-        min-height: 100px;
-        padding: 10px 6px;
-    }
-    
-    .game-img {
-        width: 65px;
-        height: 65px;
-    }
-    
-    .game-name {
-        font-size: 10px;
-    }
-}
-
-/* Tablet */
-@media (max-width: 768px) {
-    .game-grid-wrapper {
-        max-width: 420px;
-        padding: 0 4px;
-    }
-    
-    .game-grid {
-        gap: 8px;
-    }
-    
-    .game-card {
-        max-width: 130px;
-        min-height: 80px;
-        padding: 6px 3px;
-        border-radius: 10px;
-    }
-    
-    .game-img {
-        width: 52px;
-        height: 52px;
-    }
-    
-    .game-name {
-        font-size: 8px;
-        margin-top: 4px;
-    }
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-    .game-grid-wrapper {
-        max-width: 100%;
-        padding: 0 6px;
-    }
-    
-    .game-grid {
-        gap: 8px;
-    }
-    
-    .game-card {
-        max-width: 115px;
-        min-height: 75px;
-        padding: 6px 3px;
-        border-radius: 10px;
-    }
-    
-    .game-img {
-        width: 48px;
-        height: 48px;
-    }
-    
-    .game-name {
-        font-size: 8px;
-        margin-top: 3px;
-    }
-}
-
-/* Mobile kecil */
-@media (max-width: 400px) {
-    .game-grid-wrapper {
-        padding: 0 4px;
-    }
-    
-    .game-grid {
-        gap: 6px;
-    }
-    
-    .game-card {
-        max-width: 100px;
-        min-height: 65px;
-        padding: 5px 2px;
-        border-radius: 8px;
-    }
-    
-    .game-img {
-        width: 42px;
-        height: 42px;
-    }
-    
-    .game-name {
-        font-size: 7px;
-        margin-top: 3px;
-    }
-    
-    .moneyjar-sticker {
-        font-size: 4px;
-        padding: 1px 3px;
-    }
-}
-
-/* HP sangat kecil */
-@media (max-width: 350px) {
-    .game-grid {
-        gap: 5px;
-    }
-    
-    .game-card {
-        max-width: 85px;
-        min-height: 55px;
-        padding: 4px 2px;
-        border-radius: 6px;
-    }
-    
-    .game-img {
-        width: 36px;
-        height: 36px;
-    }
-    
-    .game-name {
-        font-size: 6px;
-        margin-top: 2px;
-    }
-}
-
-.moneyjar-sticker {
-    position: absolute;
-    bottom: -4px;
-    left: -4px;
-    background: linear-gradient(135deg, #FFD700, #FF8C00);
-    color: #1a1a2e;
-    font-size: 6px;
-    font-weight: bold;
-    padding: 2px 4px;
-    border-radius: 8px;
-    z-index: 5;
-    white-space: nowrap;
-}
-
-/* ========================================
-   GAME PLAY - CONTAINER
+   GAME PLAY
    ======================================== */
 .game-play-container {
     display: none;
@@ -502,9 +596,6 @@ body {
     display: flex;
 }
 
-/* ========================================
-   GAME PLAY - SIDEBAR
-   ======================================== */
 .game-play-sidebar {
     width: 80px;
     flex-shrink: 0;
@@ -581,9 +672,6 @@ body {
     color: #0f0c29;
 }
 
-/* ========================================
-   GAME PLAY - FRAME
-   ======================================== */
 .game-frame-container {
     flex: 1;
     display: flex;
@@ -731,9 +819,6 @@ body {
     min-height: 0;
 }
 
-/* ========================================
-   MUSIK - PLAYLIST
-   ======================================== */
 .musik-playlist {
     width: 260px;
     flex-shrink: 0;
@@ -829,9 +914,6 @@ body {
     50% { opacity: 0.5; transform: scale(0.8); }
 }
 
-/* ========================================
-   MUSIK - PLAYER
-   ======================================== */
 .musik-player-wrapper {
     flex: 1;
     background: rgba(25, 32, 55, 0.7);
@@ -1005,199 +1087,160 @@ body {
 }
 
 /* ========================================
-   AKUN PAGE
+   AKUN PAGE - SEDERHANA
    ======================================== */
 .akun-container {
-    max-width: 500px;
+    max-width: 420px;
     margin: 0 auto;
     padding: 16px;
 }
 
-.akun-container .profile-card {
+.akun-card {
     background: rgba(25, 32, 55, 0.7);
-    border-radius: 20px;
-    padding: 20px;
-    text-align: center;
+    border-radius: 16px;
+    padding: 24px 20px;
     border: 1px solid rgba(255,255,255,0.08);
 }
 
-.akun-container .profile-card .avatar-big {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #f39c12;
-    margin-bottom: 10px;
-}
-
-.akun-container .profile-card .nickname {
+.akun-card .akun-title {
     font-size: 18px;
     font-weight: 700;
-    margin-bottom: 4px;
+    margin-bottom: 16px;
+    text-align: center;
 }
 
-.akun-container .profile-card .account-badge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 9px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    background: rgba(243, 156, 18, 0.2);
+.akun-card .akun-title .icon {
+    margin-right: 8px;
+}
+
+.akun-card .akun-info {
+    text-align: center;
+    padding: 12px 0;
+}
+
+.akun-card .akun-info .info-name {
+    font-size: 20px;
+    font-weight: 700;
     color: #f39c12;
-    border: 1px solid rgba(243, 156, 18, 0.3);
 }
 
-.akun-container .profile-card .account-badge.guest {
+.akun-card .akun-info .info-uid {
+    font-size: 13px;
+    opacity: 0.5;
+    margin-top: 4px;
+    font-family: monospace;
+}
+
+.akun-card .akun-info .info-status {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
     background: rgba(46, 204, 113, 0.2);
     color: #2ecc71;
-    border-color: rgba(46, 204, 113, 0.3);
+    border: 1px solid rgba(46, 204, 113, 0.2);
 }
 
-.akun-container .profile-card .account-badge.default {
-    background: rgba(52, 152, 219, 0.2);
-    color: #3498db;
-    border-color: rgba(52, 152, 219, 0.3);
+.akun-card .akun-info .info-status.tamu {
+    background: rgba(243, 156, 18, 0.2);
+    color: #f39c12;
+    border-color: rgba(243, 156, 18, 0.2);
 }
 
-.akun-container .input-group {
-    text-align: left;
-    margin-top: 12px;
+.akun-card .divider {
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+    margin: 16px 0;
 }
 
-.akun-container .input-group label {
+/* Form Login */
+.akun-card .login-form .input-group {
+    margin-bottom: 12px;
+}
+
+.akun-card .login-form .input-group label {
     display: block;
     font-size: 11px;
-    opacity: 0.7;
+    opacity: 0.5;
     margin-bottom: 4px;
+    font-weight: 500;
 }
 
-.akun-container .input-group input {
+.akun-card .login-form .input-group input {
     width: 100%;
     padding: 10px 14px;
     background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 10px;
     color: white;
     font-size: 13px;
     transition: 0.2s;
+    font-family: monospace;
 }
 
-.akun-container .input-group input:focus {
+.akun-card .login-form .input-group input:focus {
     outline: none;
     border-color: #f39c12;
     background: rgba(255,255,255,0.08);
 }
 
-.akun-container .input-group input[type="password"] {
-    letter-spacing: 2px;
+.akun-card .login-form .input-group input::placeholder {
+    color: rgba(255,255,255,0.2);
+    font-family: 'Inter', sans-serif;
 }
 
-.akun-container .btn-save {
+.akun-card .btn-login {
     width: 100%;
-    padding: 10px;
-    margin-top: 12px;
+    padding: 12px;
     background: linear-gradient(135deg, #f39c12, #e67e22);
     border: none;
     border-radius: 10px;
     color: #0a0a1a;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     cursor: pointer;
     transition: 0.2s;
+    margin-top: 4px;
 }
 
-.akun-container .btn-save:hover {
+.akun-card .btn-login:hover {
     transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(243, 156, 18, 0.3);
 }
 
-.akun-container .btn-save:active {
+.akun-card .btn-login:active {
     transform: scale(0.98);
 }
 
-.akun-container .btn-guest {
+.akun-card .btn-ganti {
     width: 100%;
-    padding: 10px;
-    margin-top: 8px;
-    background: linear-gradient(135deg, #2ecc71, #27ae60);
-    border: none;
-    border-radius: 10px;
-    color: #0a0a1a;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.akun-container .btn-guest:hover {
-    transform: scale(1.02);
-}
-
-.akun-container .btn-guest:active {
-    transform: scale(0.98);
-}
-
-.akun-container .btn-default {
-    width: 100%;
-    padding: 10px;
-    margin-top: 8px;
-    background: linear-gradient(135deg, #3498db, #2980b9);
-    border: none;
+    padding: 12px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 10px;
     color: white;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
     transition: 0.2s;
+    margin-top: 8px;
 }
 
-.akun-container .btn-default:hover {
-    transform: scale(1.02);
+.akun-card .btn-ganti:hover {
+    background: rgba(255,255,255,0.12);
 }
 
-.akun-container .btn-default:active {
+.akun-card .btn-ganti:active {
     transform: scale(0.98);
 }
 
-.akun-container .token-status {
-    margin-top: 10px;
+.akun-card .akun-footer {
+    text-align: center;
     font-size: 11px;
-    opacity: 0.5;
-}
-
-/* ========================================
-   SETTING PAGE
-   ======================================== */
-.setting-container {
-    max-width: 550px;
-    margin: 0 auto;
-    padding: 16px;
-}
-
-.setting-container .card {
-    background: rgba(25, 32, 55, 0.7);
-    border-radius: 20px;
-    padding: 20px;
-    border: 1px solid rgba(255,255,255,0.08);
-}
-
-.setting-container .card h3 {
-    margin-bottom: 14px;
-    color: #f39c12;
-    font-size: 16px;
-}
-
-.setting-container .card .step {
-    padding: 10px 14px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 10px;
-    margin-bottom: 8px;
-    font-size: 12px;
-    line-height: 1.6;
-}
-
-.setting-container .card .step b {
-    color: #f39c12;
+    opacity: 0.3;
+    margin-top: 14px;
 }
 
 /* ========================================
@@ -1446,7 +1489,7 @@ body {
 }
 
 /* ========================================
-   RESPONSIVE - TETAP 3 KOLOM
+   RESPONSIVE
    ======================================== */
 @media (max-width: 768px) {
     .desktop-tabs { display: none; }
@@ -1460,9 +1503,41 @@ body {
     
     .main-content { max-width: 100%; border-radius: 0; }
     
+    .games-slider {
+        aspect-ratio: 6 / 2.2;
+        border-radius: 12px;
+    }
+    
+    .games-slider .slide-item .slide-overlay .slide-title {
+        font-size: 14px;
+    }
+    
+    .games-servers {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 8px;
+    }
+    
+    .games-servers .server-btn {
+        padding: 12px 10px;
+        font-size: 11px;
+    }
+    
+    .games-servers .server-btn .server-icon {
+        font-size: 20px;
+    }
+    
+    .games-favorite .fav-item {
+        width: 60px;
+    }
+    
+    .games-favorite .fav-item .fav-img {
+        width: 50px;
+        height: 50px;
+    }
+    
     .game-grid-wrapper {
-        padding: 0 2px;
-        max-width: 100%;
+        max-width: 450px;
+        padding: 0 6px;
     }
     
     .game-grid {
@@ -1472,13 +1547,13 @@ body {
     .game-card {
         padding: 8px 4px;
         border-radius: 12px;
-        min-height: 85px;
-        aspect-ratio: 1 / 1.12;
+        max-width: 140px;
+        min-height: 75px;
     }
     
     .game-img {
-        width: 55px;
-        height: 55px;
+        width: 60px;
+        height: 60px;
     }
     
     .game-name {
@@ -1486,18 +1561,17 @@ body {
         margin-top: 4px;
     }
     
-    .moneyjar-sticker {
-        font-size: 5px;
-        padding: 1px 3px;
-    }
-    
     .main-header .logo { font-size: 17px; }
     .main-header .logo img { width: 30px; height: 30px; }
     
     .header-actions button { font-size: 9px; padding: 5px 10px; }
-    .akun-container, .setting-container { padding: 10px; }
+    .akun-container { padding: 10px; }
     .page-content { padding: 10px 10px 70px 10px; }
     .toast-notif { bottom: 65px; font-size: 11px; padding: 8px 14px; }
+
+    .akun-card { padding: 20px 16px; }
+    .akun-card .akun-info .info-name { font-size: 18px; }
+    .akun-card .akun-title { font-size: 16px; }
 
     .musik-container .musik-body {
         flex-direction: column;
@@ -1602,40 +1676,99 @@ body {
     .about-container .about-bio { font-size: 12px; }
 }
 
-/* ========================================
-   RESPONSIVE - MOBILE KECIL (TETAP 3 KOLOM)
-   ======================================== */
 @media (max-width: 480px) {
-    .game-grid {
+    .games-slider {
+        aspect-ratio: 6 / 2.4;
+        border-radius: 10px;
+    }
+    
+    .games-slider .slide-item .slide-overlay {
+        padding: 6px 12px;
+    }
+    
+    .games-slider .slide-item .slide-overlay .slide-title {
+        font-size: 12px;
+    }
+    
+    .games-slider .slide-dots .dot {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .games-slider .slide-dots .dot.active {
+        width: 16px;
+    }
+    
+    .games-servers {
+        grid-template-columns: repeat(3, 1fr);
         gap: 6px;
     }
     
-    .game-card {
-        padding: 6px 3px;
+    .games-servers .server-btn {
+        padding: 10px 8px;
+        font-size: 10px;
         border-radius: 10px;
+    }
+    
+    .games-servers .server-btn .server-icon {
+        font-size: 18px;
+        margin-bottom: 4px;
+    }
+    
+    .games-servers .server-btn .server-name {
+        font-size: 9px;
+    }
+    
+    .games-servers .server-btn .server-count {
+        font-size: 7px;
+    }
+    
+    .games-favorite .fav-item {
+        width: 50px;
+    }
+    
+    .games-favorite .fav-item .fav-img {
+        width: 42px;
+        height: 42px;
+    }
+    
+    .games-favorite .fav-item .fav-name {
+        font-size: 7px;
+        max-width: 42px;
+    }
+    
+    .game-grid-wrapper {
+        max-width: 100%;
+        padding: 0 6px;
+    }
+    
+    .game-grid {
+        gap: 8px;
+    }
+    
+    .game-card {
+        padding: 8px 4px;
+        border-radius: 12px;
+        max-width: 120px;
         min-height: 70px;
-        aspect-ratio: 1 / 1.1;
     }
     
     .game-img {
-        width: 45px;
-        height: 45px;
+        width: 55px;
+        height: 55px;
     }
     
     .game-name {
-        font-size: 8px;
-        margin-top: 3px;
-    }
-    
-    .moneyjar-sticker {
-        font-size: 5px;
-        padding: 1px 2px;
-        bottom: -3px;
-        left: -3px;
+        font-size: 9px;
+        margin-top: 4px;
     }
     
     .page-content { padding: 6px 6px 60px 6px; }
     .toast-notif { bottom: 60px; font-size: 10px; padding: 6px 12px; }
+
+    .akun-card { padding: 16px 12px; }
+    .akun-card .akun-info .info-name { font-size: 16px; }
+    .akun-card .akun-title { font-size: 15px; }
 
     .musik-playlist { max-height: 100px; padding: 8px; }
     
@@ -1682,21 +1815,68 @@ body {
     .game-frame-header .btn-close-frame { font-size: 10px; padding: 3px 10px; }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 400px) {
+    .games-servers {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+    }
+    
+    .games-servers .server-btn {
+        padding: 8px 6px;
+        font-size: 9px;
+        border-radius: 8px;
+    }
+    
+    .games-servers .server-btn .server-icon {
+        font-size: 16px;
+    }
+    
+    .games-servers .server-btn .server-name {
+        font-size: 8px;
+    }
+    
+    .game-grid {
+        gap: 6px;
+    }
+    
+    .game-card {
+        padding: 6px 3px;
+        border-radius: 10px;
+        max-width: 105px;
+        min-height: 60px;
+    }
+    
+    .game-img {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .game-name {
+        font-size: 8px;
+        margin-top: 3px;
+    }
+}
+
+@media (max-width: 350px) {
+    .games-servers {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+    }
+    
     .game-grid {
         gap: 5px;
     }
     
     .game-card {
-        padding: 4px 2px;
+        padding: 5px 2px;
         border-radius: 8px;
-        min-height: 60px;
-        aspect-ratio: 1 / 1.05;
+        max-width: 95px;
+        min-height: 50px;
     }
     
     .game-img {
-        width: 38px;
-        height: 38px;
+        width: 42px;
+        height: 42px;
     }
     
     .game-name {
@@ -1722,11 +1902,10 @@ body {
 
     <!-- ============ DESKTOP TABS ============ -->
     <div class="desktop-tabs" id="desktopTabs">
-        <button class="tab-btn active" data-tab="musik" onclick="switchTab('musik')">🎵 Musik</button>
-        <button class="tab-btn" data-tab="games" onclick="switchTab('games')">🎰 Games</button>
+        <button class="tab-btn" data-tab="musik" onclick="switchTab('musik')">🎵 Musik</button>
+        <button class="tab-btn active" data-tab="games" onclick="switchTab('games')">🎮 Games</button>
         <button class="tab-btn" data-tab="akun" onclick="switchTab('akun')">👤 Akun</button>
-        <button class="tab-btn" data-tab="setting" onclick="switchTab('setting')">📢 Info</button>
-        <button class="tab-btn" data-tab="about" onclick="switchTab('about')">😎 About Me</button>
+        <button class="tab-btn" data-tab="about" onclick="switchTab('about')">😎 About</button>
     </div>
 
     <!-- ============ MAIN LAYOUT ============ -->
@@ -1734,19 +1913,16 @@ body {
         <div class="main-content">
 
             <!-- ===== PAGE: MUSIK ===== -->
-            <div class="page-content active" id="page-musik">
+            <div class="page-content" id="page-musik">
                 <div class="musik-container">
                     <div class="musik-header">
                         <h2>🎵 Music Player</h2>
                         <div class="now-playing">🎶 Now Playing: <strong id="nowPlayingName">-</strong></div>
                     </div>
                     <div class="musik-body">
-                        <!-- PLAYLIST -->
                         <div class="musik-playlist" id="musikPlaylist">
                             <div class="playlist-title">📋 Daftar Lagu</div>
                         </div>
-
-                        <!-- PLAYER -->
                         <div class="musik-player-wrapper">
                             <div class="musik-cover" id="musikCover">
                                 <span>🎵</span>
@@ -1771,11 +1947,70 @@ body {
             </div>
 
             <!-- ===== PAGE: GAMES ===== -->
-            <div class="page-content" id="page-games">
-                <div class="game-grid-wrapper">
-                    <div class="game-grid" id="gameGridGames"></div>
+            <div class="page-content active" id="page-games">
+                <div class="games-container">
+                    <!-- SLIDER BANNER -->
+                    <div class="games-slider" id="gameSlider">
+                        <div class="slide-track" id="slideTrack">
+                            <!-- Akan diisi JavaScript -->
+                        </div>
+                        <div class="slide-dots" id="slideDots">
+                            <!-- Akan diisi JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- FAVORITE GAMES -->
+                    <div class="games-favorite">
+                        <div class="fav-header">
+                            <h3>⭐ Favorite Games</h3>
+                            <span class="fav-badge">Top 5</span>
+                        </div>
+                        <div class="fav-list" id="favList">
+                            <!-- Akan diisi JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- SERVER MENU -->
+                    <div class="games-servers">
+                        <button class="server-btn active" onclick="filterGames('all')" id="serverAll">
+                            <span class="server-icon">🎮</span>
+                            <span class="server-name">Semua Game</span>
+                            <span class="server-count" id="countAll">0</span>
+                        </button>
+                        <button class="server-btn" onclick="filterGames('yomi')" id="serverYomi">
+                            <span class="server-icon">🟡</span>
+                            <span class="server-name">Server Yomi</span>
+                            <span class="server-count" id="countYomi">0</span>
+                        </button>
+                        <button class="server-btn" onclick="filterGames('duole')" id="serverDuole">
+                            <span class="server-icon">🔵</span>
+                            <span class="server-name">Server Duole</span>
+                            <span class="server-count" id="countDuole">0</span>
+                        </button>
+                        <button class="server-btn" onclick="filterGames('osgame')" id="serverOsgame">
+                            <span class="server-icon">🟣</span>
+                            <span class="server-name">Server Osgame</span>
+                            <span class="server-count" id="countOsgame">0</span>
+                        </button>
+                        <button class="server-btn" onclick="filterGames('cloudfront')" id="serverCloudfront">
+                            <span class="server-icon">☁️</span>
+                            <span class="server-name">CloudFront</span>
+                            <span class="server-count" id="countCloudfront">0</span>
+                        </button>
+                        <button class="server-btn" onclick="filterGames('xooncdn')" id="serverXooncdn">
+                            <span class="server-icon">🚀</span>
+                            <span class="server-name">XoonCDN</span>
+                            <span class="server-count" id="countXooncdn">0</span>
+                        </button>
+                    </div>
+
+                    <!-- GAME GRID -->
+                    <div class="game-grid-wrapper">
+                        <div class="game-grid" id="gameGridGames"></div>
+                    </div>
                 </div>
 
+                <!-- GAME PLAY CONTAINER -->
                 <div class="game-play-container" id="gamePlayContainer">
                     <div class="game-play-sidebar" id="gamePlaySidebar"></div>
                     <div class="game-frame-container" id="gameFrameContainer">
@@ -1797,45 +2032,8 @@ body {
             <!-- ===== PAGE: AKUN ===== -->
             <div class="page-content" id="page-akun">
                 <div class="akun-container">
-                    <div class="profile-card">
-                        <img class="avatar-big" id="profileAvatar" src="https://i.ibb.co.com/F4zMvW25/20260712-173425.jpg" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23f39c12%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22 font-size=%2250%22%3ES%3C/text%3E%3C/svg%3E'">
-                        <div class="nickname" id="profileNickname">SodroN</div>
-                        <div class="account-badge" id="accountBadge">👑 Akun Utama</div>
-                        <div class="input-group">
-                            <label>🎫 Token</label>
-                            <input type="text" id="editToken" placeholder="Masukkan token baru" value="update-MyToken">
-                        </div>
-                        <button class="btn-save" onclick="saveAccountData()">💾 Simpan Akun</button>
-                        <button class="btn-guest" onclick="loginAsGuest()">👤 Coba Login Sebagai TAMU</button>
-                        <button class="btn-default" onclick="loginAsDefault()">🔙 Kembali ke Default</button>
-                        <div class="token-status" id="tokenStatus">Akun tersimpan di browser</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ===== PAGE: SETTING ===== -->
-            <div class="page-content" id="page-setting">
-                <div class="setting-container">
-                    <div class="card">
-                        <h3>🔗 CARA MENGKONEKAN AKUN</h3>
-                        <div class="step">
-                            <b>1.</b> Klik Menu <b>Akun</b>.
-                        </div>
-                        <div class="step">
-                            <b>2.</b> Masukkan atau <b>Update Token</b> akun XOON Anda di kolom yang tersedia.
-                        </div>
-                        <div class="step">
-                            <b>3.</b> Tekan tombol <b>💾 Simpan Akun</b>.
-                        </div>
-                        <div class="step" style="background:rgba(243,156,18,0.1);border:1px solid rgba(243,156,18,0.2);">
-                            ✅ Akun XOON Anda akan terhubung dan token tersimpan di browser.
-                        </div>
-                        <div class="step" style="background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.2);margin-top:10px;">
-                            👤 <b>Login Tamu:</b> Klik tombol <b>"Coba Login Sebagai TAMU"</b> untuk menggunakan akun tamu dengan cepat.
-                        </div>
-                        <div class="step" style="background:rgba(52,152,219,0.1);border:1px solid rgba(52,152,219,0.2);margin-top:10px;">
-                            🔙 <b>Kembali ke Default:</b> Klik tombol <b>"Kembali ke Default"</b> untuk kembali ke akun utama SodroN.
-                        </div>
+                    <div class="akun-card" id="akunCard">
+                        <!-- Akan diisi JavaScript -->
                     </div>
                 </div>
             </div>
@@ -1847,71 +2045,70 @@ body {
                         <img class="about-avatar" src="https://i.ibb.co.com/F4zMvW25/20260712-173425.jpg" alt="SodroN" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23f39c12%22 width=%22120%22 height=%22120%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22 font-size=%2260%22%3ES%3C/text%3E%3C/svg%3E'">
                         <div class="about-name">SodroN</div>
                         <div class="about-role">🚀 Web Enthusiast & Gamer</div>
-
                         <div class="about-bio">
-                        <center>  
-<strong style="background: linear-gradient(135deg, #4A90D9, #D4AF37); 
-               -webkit-background-clip: text; 
-               -webkit-text-fill-color: transparent; 
-               font-size: 14px; 
-               display: inline-block;
-               font-weight: 800;
-               text-shadow: 0 0 30px rgba(74, 144, 217, 0.2);">
-    selamat datang diwelcome! 
-</strong><br>
-                            <p>
-                                Halo! Saya <span>SodroN</span>, seorang penggemar teknologi dan pecinta game. <br>
-                                Saya membuat website ini sebagai <span>proyek pribadi</span>
-                            </p> 
-                            <br>
-                            <div class="highlight-box">
-                                <div class="emoji">⚠️</div>
-                                <strong style="color:#e74c3c;">Catatan Penting:</strong><br>
-                                Semua game yang tersedia di halaman <span>Games</span> <strong style="color:#e74c3c;">BUKAN</strong> buatan saya. 
-                                Saya hanya mengumpulkan dan menyediakan link akses cepat dari platform 
-                                <span>Xoon.live</span> untuk bermain secara offline
+                            <center>
+                                <strong style="background: linear-gradient(135deg, #4A90D9, #D4AF37); 
+                                       -webkit-background-clip: text; 
+                                       -webkit-text-fill-color: transparent; 
+                                       font-size: 14px; 
+                                       display: inline-block;
+                                       font-weight: 800;
+                                       text-shadow: 0 0 30px rgba(74, 144, 217, 0.2);">
+                                    selamat datang diwelcome! 
+                                </strong><br>
+                                <p>
+                                    Halo! Saya <span>SodroN</span>, seorang penggemar teknologi dan pecinta game. <br>
+                                    Saya membuat website ini sebagai <span>proyek pribadi</span>
+                                </p> 
+                                <br>
+                                <div class="highlight-box">
+                                    <div class="emoji">⚠️</div>
+                                    <strong style="color:#e74c3c;">Catatan Penting:</strong><br>
+                                    Semua game yang tersedia di halaman <span>Games</span> <strong style="color:#e74c3c;">BUKAN</strong> buatan saya. 
+                                    Saya hanya mengumpulkan dan menyediakan link akses cepat dari platform 
+                                    <span>Xoon.live</span> untuk bermain secara offline
+                                </div>
+                                <br>
+                                <p>
+                                    🎮 Saya suka bermain game, mendengarkan musik, dan terus belajar hal-hal baru 
+                                    di dunia pemrograman. Platform ini saya buat untuk <span>kebutuhan pribadi</span> 
+                                    dan <strong>saya tidak akan mengupdate apapun lagi</strong> ke depannya. 
+                                    Jika suatu saat terjadi <span>masalah link error</span> atau ada 
+                                    <span>perubahan dari web resmi Xoon</span>, saya mohon maklum.
+                                </p>
+                                <br>
+                                <p>
+                                    🔐 Bagi kalian yang ingin mencoba mengaplikasikan ke akun masing-masing, 
+                                    cukup <span>masukkan uid & token akun</span> kalian di menu Akun. 
+                                    Token kalian <strong>AMAN</strong> karena semua aktivitas di web ini 
+                                    akan tersimpan di <span>browser kalian masing-masing</span> 
+                                    dan <strong>tidak akan bocor ke publik</strong>.
+                                </p>
+                                <br>
+                                <p>
+                                    💡 <span>#AlwaysLearning #CodeIsArt</span>
+                                </p>
+                            </center>
+                        </div>
+                        <center>
+                            <div class="social-links">
+                                <a href="#" onclick="showToast('🌐 Website: Coming Soon!')">
+                                    <span class="social-icon">🌐</span> Website
+                                </a>
+                                <a href="#" onclick="showToast('🐦 Twitter: Coming Soon!')">
+                                    <span class="social-icon">🐦</span> Twitter
+                                </a>
+                                <a href="#" onclick="showToast('💻 GitHub: Coming Soon!')">
+                                    <span class="social-icon">💻</span> GitHub
+                                </a>
+                                <a href="#" onclick="showToast('📸 Instagram: Coming Soon!')">
+                                    <span class="social-icon">📸</span> Instagram
+                                </a>
+                                <a href="#" onclick="showToast('📱 TikTok: Coming Soon!')">
+                                    <span class="social-icon">📱</span> TikTok
+                                </a>
                             </div>
-                            <br>
-                                                        <p>
-                                🎮 Saya suka bermain game, mendengarkan musik, dan terus belajar hal-hal baru 
-                                di dunia pemrograman. Platform ini saya buat untuk <span>kebutuhan pribadi</span> 
-                                dan <strong>saya tidak akan mengupdate apapun lagi</strong> ke depannya. 
-                                Jika suatu saat terjadi <span>masalah link error</span> atau ada 
-                                <span>perubahan dari web resmi Xoon</span>, saya mohon maklum.
-                            </p>
-                            <br>
-                            <p>
-                                🔐 Bagi kalian yang ingin mencoba mengaplikasikan ke akun masing-masing, 
-                                cukup <span>masukkan token akun</span> kalian di menu Akun. 
-                                Token kalian <strong>AMAN</strong> karena semua aktivitas di web ini 
-                                akan tersimpan di <span>browser kalian masing-masing</span> 
-                                dan <strong>tidak akan bocor ke publik</strong>.
-                            </p>
-                            <br>
-                            <p> </center>
-                                💡 <span>#AlwaysLearning #CodeIsArt</span>
-                            </p>
-                        </div>
-<center>
-                        <div class="social-links">
-                            <a href="#" onclick="showToast('🌐 Website: Coming Soon!')">
-                                <span class="social-icon">🌐</span> Website
-                            </a>
-                            <a href="#" onclick="showToast('🐦 Twitter: Coming Soon!')">
-                                <span class="social-icon">🐦</span> Twitter
-                            </a>
-                            <a href="#" onclick="showToast('💻 GitHub: Coming Soon!')">
-                                <span class="social-icon">💻</span> GitHub
-                            </a>
-                            <a href="#" onclick="showToast('📸 Instagram: Coming Soon!')">
-                                <span class="social-icon">📸</span> Instagram
-                            </a>
-                            <a href="#" onclick="showToast('📱 TikTok: Coming Soon!')">
-                                <span class="social-icon">📱</span> TikTok
-                            </a>
-                        </div>
-</center>
-                        <!-- Tombol Xoon.live -->
+                        </center>
                         <div style="margin-top: 16px; text-align: center;">
                             <button onclick="openXoon()" 
                                     style="display: inline-flex; align-items: center; gap: 10px; 
@@ -1932,7 +2129,6 @@ body {
                                 🚀 Kunjungi Xoon.live
                             </button>
                         </div>
-
                         <div class="about-stats">
                             <div class="stat-item">
                                 <div class="stat-number" id="totalGames">0</div>
@@ -1947,13 +2143,11 @@ body {
                                 <div class="stat-label">📦 Version</div>
                             </div>
                         </div>
-
                         <div class="credit-note">
-                            📌 <strong></strong> Semua game berasal dari <strong>Xoon.live</strong>
+                            📌 Semua game berasal dari <strong>Xoon.live</strong>
                             Saya tidak memiliki hak cipta atas game-game tersebut.
                         </div>
-
-                                               <div class="version-info">
+                        <div class="version-info">
                             © 2026 SodroN | Dibuat dengan ❤️ dan ☕
                         </div>
                         <div class="version-info">
@@ -1977,25 +2171,21 @@ body {
     <!-- ============ MOBILE BOTTOM NAV ============ -->
     <nav class="mobile-bottom-nav" id="mobileNav">
         <div class="nav-items">
-            <button class="nav-item active" data-tab="musik" onclick="switchTab('musik')">
+            <button class="nav-item" data-tab="musik" onclick="switchTab('musik')">
                 <span class="icon">🎵</span>
                 <span>Musik</span>
             </button>
-            <button class="nav-item" data-tab="games" onclick="switchTab('games')">
-                <span class="icon">🎰</span>
+            <button class="nav-item active" data-tab="games" onclick="switchTab('games')">
+                <span class="icon">🎮</span>
                 <span>Games</span>
             </button>
             <button class="nav-item" data-tab="akun" onclick="switchTab('akun')">
                 <span class="icon">👤</span>
                 <span>Akun</span>
             </button>
-            <button class="nav-item" data-tab="setting" onclick="switchTab('setting')">
-                <span class="icon">📢</span>
-                <span>Info</span>
-            </button>
             <button class="nav-item" data-tab="about" onclick="switchTab('about')">
                 <span class="icon">😎</span>
-                <span>About Me</span>
+                <span>About</span>
             </button>
         </div>
     </nav>
@@ -2003,60 +2193,60 @@ body {
     <script>
         // ============ DATA GAME ============
         const ALL_GAMES = [
-            // === GAME UTAMA ===
-            { n: "Mahjong Ways", img: "https://i.ibb.co.com/xSX4Gshj/image-c3be9824.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/55?" },
-            { n: "Racing Car", img: "https://i.ibb.co.com/0jVVsPpK/image-291941ed.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=speed_racing&", moneyjar: true },
-            { n: "Yummy Slots", img: "https://i.ibb.co.com/93YBy8dD/image-6f232e98.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?mode=games&game_name=yammy_slots&", moneyjar: true },
-            { n: "Poker Ace", img: "https://i.ibb.co.com/TqYmvxjm/image-6095cb4d.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/52?" },
-            { n: "Jungle Hunt", img: "https://i.ibb.co.com/bt8fpVJ/image-9e8e69df.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/827?isHalf=false&heightRatio=1&gameMaker=2" },
-            { n: "Ocean Hunt", img: "https://i.ibb.co.com/4ZdLx931/image-be4a4065.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/828?isHalf=false&heightRatio=1&gameMaker=2" },
-            { n: "Super Ace", img: "https://i.ibb.co.com/S43wwsc1/image-3096ca0.png", u: "https://www.duolefast.com/common-web/full/game1015/1.1.3/web-mobile/index.html?bizAppId=100049&gameid=1200013&engameid=1015&isHalf=false&heightRatio=1&gameMaker=2" },
-            { n: "MegaJackpot", img: "https://i.ibb.co.com/99ss7rWM/image-1c20034.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/62?" },
-            { n: "Lucky Gem", img: "https://i.ibb.co.com/cSzPymHW/image-af0c016a.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=fortune_gems&", moneyjar: true },
-            { n: "King Of Olympus", img: "https://i.ibb.co.com/8nDVwzmx/image-adbf1924.png", u: "https://cdn-xoon.leadercc.com/games/gatesOfOlympus/index.html?" },
-            { n: "Bandito", img: "https://i.ibb.co.com/4nyzcVkH/image-78c04432.png", u: "https://www.duolefast.com/common-web/full/game1026/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200008&engameid=1026&" },
-            { n: "CrazyGems", img: "https://i.ibb.co.com/QvJ098ct/image-5b088966.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/43?" },
-            { n: "Treasure", img: "https://i.ibb.co.com/WWGsqCRm/image-a3e85944.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=deep_sea_treasures&", moneyjar: true },
-            { n: "Gates Of Hades", img: "https://i.ibb.co.com/Pvxg0wHj/image-76501474.png", u: "https://www.duolefast.com/common-web/full/game1029/1.1.3/web-mobile/index.html?bizAppId=100049&gameid=1200014&engameid=1029&isHalf=false&heightRatio=1&gameMaker=2" },
-            { n: "Emperor", img: "https://i.ibb.co.com/Jw4ZtC07/image-eea8fc8c.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/48?" },
-            { n: "Fishing I", img: "https://i.ibb.co.com/hSmDTJQ/image-2ee7d78b.png", u: "https://d1wtralw2m821s.cloudfront.net/games/fish6/index.html?mode=games&game_name=fish6&isHalf=false&game_id=104&", moneyjar: true },
-            { n: "Mahjong Ways II", img: "https://i.ibb.co.com/b58gmwKX/image-8cbe9cc0.png", u: "https://www.duolefast.com/common-web/full/game1009/1.0.4/web-mobile/index.html?bizAppId=100049&gameid=1200006&engameid=1009&" },
-            { n: "Olympus II", img: "https://i.ibb.co.com/jZ3KpQf0/image-9439adea.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/27?" },
-            { n: "Sweet Bonanza", img: "https://i.ibb.co.com/kv9CP9k/image-2149c8f.png", u: "https://d1wtralw2m821s.cloudfront.net/games/sweet_feast/index.html?mode=games&game_name=sweet_feast&isHalf=false&game_id=106", moneyjar: true },
-            { n: "Lucky Slot", img: "https://i.ibb.co.com/Q7VwwgVB/image-4596ad14.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=luckyslots&" },
-            { n: "World Goal", img: "https://i.ibb.co.com/pBY0QpB4/image-26e69896.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/284?isHalf=false&heightRatio=1&gameMaker=2" },
-            { n: "Fortune Pot", img: "https://i.ibb.co.com/F48MCD5b/image-c442ea28.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/560?isHalf=false&heightRatio=1&gameMaker=2" },
-            { n: "WealthyTiger", img: "https://i.ibb.co.com/60dY6bHK/image-9169f717.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/60?" },
-            { n: "Greedy Monkey", img: "https://i.ibb.co.com/hFrqjVym/image-1a720f12.png", u: "https://d1wtralw2m821s.cloudfront.net/games/monkey_wheel/index.html?" },
-            { n: "Monkey King II", img: "https://i.ibb.co.com/5hmGg12W/image-201fbf0f.png", u: "https://www.duolefast.com/common-web/full/game1014/1.0.4/web-mobile/index.html?bizAppId=100049&gameid=1200007&engameid=1014&isHalf=false&heightRatio=1&gameMaker=2" },
-            { n: "Pirate King 2", img: "https://i.ibb.co.com/fZqbjvP/image-fc213f52.png", u: "https://d1wtralw2m821s.cloudfront.net/games/pirate_king/index.html?pl=xoon&v=11&isHalf=false&game_id=136&" },
-            { n: "Sweet Sugar", img: "https://i.ibb.co.com/1GWWGGVj/image-f55e69e0.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/41?" },
-            { n: "Greedy Lion II", img: "https://i.ibb.co.com/452fkdb/image-c721045.png", u: "https://www.duolefast.com/common-web/full/game853/1.1.3/web-mobile/index.html?bizAppId=100049&gameid=1200012&engameid=853&isHalf=false&heightRatio=1&gameMaker=2" },
-            { n: "Monkey King I", img: "https://i.ibb.co.com/GYFL4sG/image-daf45e7f.png", u: "https://d1wtralw2m821s.cloudfront.net/games/monkeyking/index.html?pl=xoon&v=11&mode=games&game_name=monkeyking&isHalf=false&heightRatio=1&gameMaker=2&game_id=128" },
-            { n: "Original 777", img: "https://i.ibb.co.com/QFYgB2Wd/image-46f6aacb.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/57?" },
-            { n: "MAHJONG II", img: "https://i.ibb.co.com/GQp31hwC/image-2071d400.png", u: "https://api.osgametheme.com/plug_new/theme7/xoon_full?isHalf=false&heightRatio=1&gameMaker=2", moneyjar: true },
-            { n: "Lucky 777", img: "https://i.ibb.co.com/ccN427rz/image-844094.png", u: "https://d1wtralw2m821s.cloudfront.net/games/lucky777/index.html?" },
-            { n: "King of Olympus II", img: "https://i.ibb.co.com/SXJJ748s/image-5a904193.png", u: "https://www.duolefast.com/common-web/full/game1000/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200005&engameid=1000&isHalf=false&heightRatio=1&gameMaker=2" },
-            { n: "Book of Death", img: "https://i.ibb.co.com/kzfyCKk/image-ca21281f.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/63?" },
-            { n: "LuckyPig", img: "https://i.ibb.co.com/HTGTWtns/image-86adbd02.png", u: "https://www.duolefast.com/common-web/full/game1017/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200002&engameid=1017&" },
-            { n: "Big Hammer", img: "https://i.ibb.co.com/VWK2Py3f/image-35f096ca.png", u: "https://cdn-xoon.leadercc.com/games/big_hammer/", moneyjar: true },
-            { n: "Mr Rich", img: "https://i.ibb.co.com/PshtqbWD/image-f646294c.png", u: "https://d1wtralw2m821s.cloudfront.net/games/mrrich/index.html?pl=xoon&v=11&mode=games&game_name=mrrich&isHalf=false&game_id=129&" },
-            { n: "Showdown", img: "https://i.ibb.co.com/FqYRw3p0/image-748da0e4.png", u: "https://www.duolefast.com/common-web/full/game1024/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200003&engameid=1024&" },
-            { n: "Deep Sea", img: "https://i.ibb.co.com/Qvh455Zx/image-f5af3b5a.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=deep_sea_fish&" },
+            // === GAME UTAMA (YOMI) ===
+            { n: "Mahjong Ways", img: "https://i.ibb.co.com/xSX4Gshj/image-c3be9824.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/55?", server: "yomi" },
+            { n: "Racing Car", img: "https://i.ibb.co.com/0jVVsPpK/image-291941ed.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=speed_racing&", server: "cloudfront", moneyjar: true },
+            { n: "Yummy Slots", img: "https://i.ibb.co.com/93YBy8dD/image-6f232e98.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?mode=games&game_name=yammy_slots&", server: "cloudfront", moneyjar: true },
+            { n: "Poker Ace", img: "https://i.ibb.co.com/TqYmvxjm/image-6095cb4d.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/52?", server: "yomi" },
+            { n: "Jungle Hunt", img: "https://i.ibb.co.com/bt8fpVJ/image-9e8e69df.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/827?isHalf=false&heightRatio=1&gameMaker=2", server: "yomi" },
+            { n: "Ocean Hunt", img: "https://i.ibb.co.com/4ZdLx931/image-be4a4065.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/828?isHalf=false&heightRatio=1&gameMaker=2", server: "yomi" },
+            { n: "Super Ace", img: "https://i.ibb.co.com/S43wwsc1/image-3096ca0.png", u: "https://www.duolefast.com/common-web/full/game1015/1.1.3/web-mobile/index.html?bizAppId=100049&gameid=1200013&engameid=1015&isHalf=false&heightRatio=1&gameMaker=2", server: "duole" },
+            { n: "MegaJackpot", img: "https://i.ibb.co.com/99ss7rWM/image-1c20034.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/62?", server: "yomi" },
+            { n: "Lucky Gem", img: "https://i.ibb.co.com/cSzPymHW/image-af0c016a.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=fortune_gems&", server: "cloudfront", moneyjar: true },
+            { n: "King Of Olympus", img: "https://i.ibb.co.com/8nDVwzmx/image-adbf1924.png", u: "https://cdn-xoon.leadercc.com/games/gatesOfOlympus/index.html?", server: "xooncdn" },
+            { n: "Bandito", img: "https://i.ibb.co.com/4nyzcVkH/image-78c04432.png", u: "https://www.duolefast.com/common-web/full/game1026/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200008&engameid=1026&", server: "duole" },
+            { n: "CrazyGems", img: "https://i.ibb.co.com/QvJ098ct/image-5b088966.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/43?", server: "yomi" },
+            { n: "Treasure", img: "https://i.ibb.co.com/WWGsqCRm/image-a3e85944.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=deep_sea_treasures&", server: "cloudfront", moneyjar: true },
+            { n: "Gates Of Hades", img: "https://i.ibb.co.com/Pvxg0wHj/image-76501474.png", u: "https://www.duolefast.com/common-web/full/game1029/1.1.3/web-mobile/index.html?bizAppId=100049&gameid=1200014&engameid=1029&isHalf=false&heightRatio=1&gameMaker=2", server: "duole" },
+            { n: "Emperor", img: "https://i.ibb.co.com/Jw4ZtC07/image-eea8fc8c.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/48?", server: "yomi" },
+            { n: "Fishing I", img: "https://i.ibb.co.com/hSmDTJQ/image-2ee7d78b.png", u: "https://d1wtralw2m821s.cloudfront.net/games/fish6/index.html?mode=games&game_name=fish6&isHalf=false&game_id=104&", server: "cloudfront", moneyjar: true },
+            { n: "Mahjong Ways II", img: "https://i.ibb.co.com/b58gmwKX/image-8cbe9cc0.png", u: "https://www.duolefast.com/common-web/full/game1009/1.0.4/web-mobile/index.html?bizAppId=100049&gameid=1200006&engameid=1009&", server: "duole" },
+            { n: "Olympus II", img: "https://i.ibb.co.com/jZ3KpQf0/image-9439adea.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/27?", server: "yomi" },
+            { n: "Sweet Bonanza", img: "https://i.ibb.co.com/kv9CP9k/image-2149c8f.png", u: "https://d1wtralw2m821s.cloudfront.net/games/sweet_feast/index.html?mode=games&game_name=sweet_feast&isHalf=false&game_id=106", server: "cloudfront", moneyjar: true },
+            { n: "Lucky Slot", img: "https://i.ibb.co.com/Q7VwwgVB/image-4596ad14.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=luckyslots&", server: "cloudfront" },
+            { n: "World Goal", img: "https://i.ibb.co.com/pBY0QpB4/image-26e69896.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/284?isHalf=false&heightRatio=1&gameMaker=2", server: "yomi" },
+            { n: "Fortune Pot", img: "https://i.ibb.co.com/F48MCD5b/image-c442ea28.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/560?isHalf=false&heightRatio=1&gameMaker=2", server: "yomi" },
+            { n: "WealthyTiger", img: "https://i.ibb.co.com/60dY6bHK/image-9169f717.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/60?", server: "yomi" },
+            { n: "Greedy Monkey", img: "https://i.ibb.co.com/hFrqjVym/image-1a720f12.png", u: "https://d1wtralw2m821s.cloudfront.net/games/monkey_wheel/index.html?", server: "cloudfront" },
+            { n: "Monkey King II", img: "https://i.ibb.co.com/5hmGg12W/image-201fbf0f.png", u: "https://www.duolefast.com/common-web/full/game1014/1.0.4/web-mobile/index.html?bizAppId=100049&gameid=1200007&engameid=1014&isHalf=false&heightRatio=1&gameMaker=2", server: "duole" },
+            { n: "Pirate King 2", img: "https://i.ibb.co.com/fZqbjvP/image-fc213f52.png", u: "https://d1wtralw2m821s.cloudfront.net/games/pirate_king/index.html?pl=xoon&v=11&isHalf=false&game_id=136&", server: "cloudfront" },
+            { n: "Sweet Sugar", img: "https://i.ibb.co.com/1GWWGGVj/image-f55e69e0.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/41?", server: "yomi" },
+            { n: "Greedy Lion II", img: "https://i.ibb.co.com/452fkdb/image-c721045.png", u: "https://www.duolefast.com/common-web/full/game853/1.1.3/web-mobile/index.html?bizAppId=100049&gameid=1200012&engameid=853&isHalf=false&heightRatio=1&gameMaker=2", server: "duole" },
+            { n: "Monkey King I", img: "https://i.ibb.co.com/GYFL4sG/image-daf45e7f.png", u: "https://d1wtralw2m821s.cloudfront.net/games/monkeyking/index.html?pl=xoon&v=11&mode=games&game_name=monkeyking&isHalf=false&heightRatio=1&gameMaker=2&game_id=128", server: "cloudfront" },
+            { n: "Original 777", img: "https://i.ibb.co.com/QFYgB2Wd/image-46f6aacb.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/57?", server: "yomi" },
+            { n: "MAHJONG II", img: "https://i.ibb.co.com/GQp31hwC/image-2071d400.png", u: "https://api.osgametheme.com/plug_new/theme7/xoon_full?isHalf=false&heightRatio=1&gameMaker=2", server: "osgame", moneyjar: true },
+            { n: "Lucky 777", img: "https://i.ibb.co.com/ccN427rz/image-844094.png", u: "https://d1wtralw2m821s.cloudfront.net/games/lucky777/index.html?", server: "cloudfront" },
+            { n: "King of Olympus II", img: "https://i.ibb.co.com/SXJJ748s/image-5a904193.png", u: "https://www.duolefast.com/common-web/full/game1000/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200005&engameid=1000&isHalf=false&heightRatio=1&gameMaker=2", server: "duole" },
+            { n: "Book of Death", img: "https://i.ibb.co.com/kzfyCKk/image-ca21281f.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/63?", server: "yomi" },
+            { n: "LuckyPig", img: "https://i.ibb.co.com/HTGTWtns/image-86adbd02.png", u: "https://www.duolefast.com/common-web/full/game1017/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200002&engameid=1017&", server: "duole" },
+            { n: "Big Hammer", img: "https://i.ibb.co.com/VWK2Py3f/image-35f096ca.png", u: "https://cdn-xoon.leadercc.com/games/big_hammer/", server: "xooncdn", moneyjar: true },
+            { n: "Mr Rich", img: "https://i.ibb.co.com/PshtqbWD/image-f646294c.png", u: "https://d1wtralw2m821s.cloudfront.net/games/mrrich/index.html?pl=xoon&v=11&mode=games&game_name=mrrich&isHalf=false&game_id=129&", server: "cloudfront" },
+            { n: "Showdown", img: "https://i.ibb.co.com/FqYRw3p0/image-748da0e4.png", u: "https://www.duolefast.com/common-web/full/game1024/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200003&engameid=1024&", server: "duole" },
+            { n: "Deep Sea", img: "https://i.ibb.co.com/Qvh455Zx/image-f5af3b5a.png", u: "https://d1wtralw2m821s.cloudfront.net/games/index.html?game_name=deep_sea_fish&", server: "cloudfront" },
 
-            // === GAME TERHAPUS ===
-            { n: "❌ Gold Tree (Game Terhapus)", img: "https://i.ibb.co.com/Qv03qzgK/image-876895c5.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/561?isHalf=false&heightRatio=1&gameMaker=2", moneyjar: false },
-            { n: "❌ Futebol Fever (Game Terhapus)", img: "https://i.ibb.co.com/kgSKDd1x/image-1a47e78.png", u: "https://www.duolefast.com/common-web/vert/game1028/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200009&engameid=1028&heightRatio=0.7&", moneyjar: false },
-            { n: "❌ Major Bass (Game Terhapus)", img: "https://i.ibb.co.com/b5DsSk96/image-47eb5477.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/562?isHalf=false&heightRatio=1&gameMaker=2", moneyjar: false },
-            { n: "❌ Jammin Jars (Game Terhapus)", img: "https://i.ibb.co.com/cK1Jvw07/image-9cd6d73d.png", u: "https://www.duolefast.com/common-web/full/game1016/1.0.1/web-mobile/index.html?bizAppId=100049&gameid=1200010&engameid=1016&", moneyjar: false },
-            { n: "❌ Golden Tree (Game Terhapus)", img: "https://i.ibb.co.com/JfJHT9T/image-25ae0677.png", u: "https://api.osgametheme.com/plug_new/theme37/xoon_full?", moneyjar: false },
-            { n: "❌ Aztec (Game Terhapus)", img: "https://i.ibb.co.com/MyLSy6qz/image-e53a217c.png", u: "https://www.duolefast.com/common-web/full/game1006/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200001&engameid=1006&", moneyjar: false },
-            { n: "❌ GradyKing (Game Terhapus)", img: "https://i.ibb.co.com/Q70MPxms/image-e9fc13ca.png", u: "https://www.duolefast.com/common-web/full/game845/", moneyjar: false },
-            { n: "❌ Fishing II (Game Terhapus)", img: "https://i.ibb.co.com/gL76WH2F/image-4687926a.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/128?", moneyjar: false },
-            { n: "❌ Fruit Flash (Game Terhapus)", img: "https://i.ibb.co.com/fGSqdbLn/image-42557977.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/35?", moneyjar: false },
-            { n: "❌ Crazy Treasure (Game Terhapus)", img: "https://i.ibb.co.com/svCsCCyt/image-89696056.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/559?isHalf=false&heightRatio=1&gameMaker=2", moneyjar: false },
-            { n: "❌ Gold Miner (Game Terhapus)", img: "https://i.ibb.co.com/v4HfF5Y9/image-3d71e7f3.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/53?", moneyjar: false }
-        ];  
+            // === GAME TERHAPUS (tetap ditampilkan) ===
+            { n: "❌ Gold Tree (Game Terhapus)", img: "https://i.ibb.co.com/Qv03qzgK/image-876895c5.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/561?isHalf=false&heightRatio=1&gameMaker=2", server: "yomi", moneyjar: false },
+            { n: "❌ Futebol Fever (Game Terhapus)", img: "https://i.ibb.co.com/kgSKDd1x/image-1a47e78.png", u: "https://www.duolefast.com/common-web/vert/game1028/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200009&engameid=1028&heightRatio=0.7&", server: "duole", moneyjar: false },
+            { n: "❌ Major Bass (Game Terhapus)", img: "https://i.ibb.co.com/b5DsSk96/image-47eb5477.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/562?isHalf=false&heightRatio=1&gameMaker=2", server: "yomi", moneyjar: false },
+            { n: "❌ Jammin Jars (Game Terhapus)", img: "https://i.ibb.co.com/cK1Jvw07/image-9cd6d73d.png", u: "https://www.duolefast.com/common-web/full/game1016/1.0.1/web-mobile/index.html?bizAppId=100049&gameid=1200010&engameid=1016&", server: "duole", moneyjar: false },
+            { n: "❌ Golden Tree (Game Terhapus)", img: "https://i.ibb.co.com/JfJHT9T/image-25ae0677.png", u: "https://api.osgametheme.com/plug_new/theme37/xoon_full?", server: "osgame", moneyjar: false },
+            { n: "❌ Aztec (Game Terhapus)", img: "https://i.ibb.co.com/MyLSy6qz/image-e53a217c.png", u: "https://www.duolefast.com/common-web/full/game1006/1.0.2/web-mobile/index.html?bizAppId=100049&gameid=1200001&engameid=1006&", server: "duole", moneyjar: false },
+            { n: "❌ GradyKing (Game Terhapus)", img: "https://i.ibb.co.com/Q70MPxms/image-e9fc13ca.png", u: "https://www.duolefast.com/common-web/full/game845/", server: "duole", moneyjar: false },
+            { n: "❌ Fishing II (Game Terhapus)", img: "https://i.ibb.co.com/gL76WH2F/image-4687926a.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/128?", server: "yomi", moneyjar: false },
+            { n: "❌ Fruit Flash (Game Terhapus)", img: "https://i.ibb.co.com/fGSqdbLn/image-42557977.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/35?", server: "yomi", moneyjar: false },
+            { n: "❌ Crazy Treasure (Game Terhapus)", img: "https://i.ibb.co.com/svCsCCyt/image-89696056.png", u: "https://api-sg-v2.yomi1413.com/gate/gateway/zzaaym/559?isHalf=false&heightRatio=1&gameMaker=2", server: "yomi", moneyjar: false },
+            { n: "❌ Gold Miner (Game Terhapus)", img: "https://i.ibb.co.com/v4HfF5Y9/image-3d71e7f3.png", u: "https://api-sg.yomi1413.com/balance/game/zzaa/302057/2/53?", server: "yomi", moneyjar: false }
+        ];
 
         // ============ DATA PLAYLIST ============
         const PLAYLIST = [
@@ -2071,6 +2261,216 @@ body {
             { id: 9, name: "Nike Ardila Full Album", artist: "Ahmad Hanafi", url: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A597850593&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" },
             { id: 10, name: "Revo Ramon Full Album", artist: "Campuran Lagu Indonesia", url: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1400266267&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" }
         ];
+
+        // ============ SLIDE BANNER ============
+        // Slide menampilkan SEMUA game
+        const SLIDE_GAMES = ALL_GAMES.map(g => ({ name: g.n, img: g.img }));
+
+        let slideIndex = 0;
+        let slideInterval = null;
+
+        function initSlider() {
+            const track = document.getElementById('slideTrack');
+            const dots = document.getElementById('slideDots');
+            
+            track.innerHTML = '';
+            dots.innerHTML = '';
+
+            SLIDE_GAMES.forEach((game, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'slide-item';
+                slide.innerHTML = `
+                    <img src="${game.img}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22200%22%3E%3Crect fill=%22%23333%22 width=%22800%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23f39c12%22 font-size=%2230%22%3E🎮%3C/text%3E%3C/svg%3E'">
+                    <div class="slide-overlay">
+                        <div class="slide-title">${game.name}</div>
+                    </div>
+                `;
+                slide.onclick = function() {
+                    const found = ALL_GAMES.find(g => g.n === game.name);
+                    if (found) {
+                        updateFavorite(found.n);
+                        openGameInPage(found);
+                    }
+                };
+                track.appendChild(slide);
+
+                const dot = document.createElement('div');
+                dot.className = 'dot' + (index === 0 ? ' active' : '');
+                dot.onclick = function() {
+                    goToSlide(index);
+                };
+                dots.appendChild(dot);
+            });
+
+            startSlide();
+        }
+
+        function goToSlide(index) {
+            slideIndex = index;
+            const track = document.getElementById('slideTrack');
+            const dots = document.querySelectorAll('.dot');
+            
+            track.style.transform = `translateX(-${index * 100}%)`;
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            slideIndex = (slideIndex + 1) % SLIDE_GAMES.length;
+            goToSlide(slideIndex);
+        }
+
+        function startSlide() {
+            if (slideInterval) clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 1000);
+        }
+
+        // ============ FAVORITE GAMES ============
+        let gamePlayCount = {};
+
+        function loadFavorites() {
+            const saved = localStorage.getItem('gamePlayCount_SodroN');
+            if (saved) {
+                try {
+                    gamePlayCount = JSON.parse(saved);
+                } catch(e) {}
+            }
+        }
+
+        function saveFavorites() {
+            localStorage.setItem('gamePlayCount_SodroN', JSON.stringify(gamePlayCount));
+        }
+
+        function updateFavorite(gameName) {
+            if (!gamePlayCount[gameName]) {
+                gamePlayCount[gameName] = 0;
+            }
+            gamePlayCount[gameName]++;
+            saveFavorites();
+            renderFavorites();
+        }
+
+        function renderFavorites() {
+            const container = document.getElementById('favList');
+            if (!container) return;
+
+            const sorted = Object.entries(gamePlayCount)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5);
+
+            container.innerHTML = '';
+
+            if (sorted.length === 0) {
+                container.innerHTML = `<div class="fav-empty">Belum ada game yang dimainkan 🎮</div>`;
+                return;
+            }
+
+            sorted.forEach(([name, count], index) => {
+                const game = ALL_GAMES.find(g => g.n === name);
+                if (!game) return;
+
+                const item = document.createElement('div');
+                item.className = 'fav-item';
+                item.innerHTML = `
+                    <img class="fav-img" src="${game.img}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect fill=%22%23333%22 width=%2260%22 height=%2260%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23f39c12%22 font-size=%2220%22%3E🎮%3C/text%3E%3C/svg%3E'">
+                    <div class="fav-rank">${index + 1}</div>
+                    <div class="fav-name">${name}</div>
+                    <div class="fav-count">${count}x</div>
+                `;
+                item.onclick = function() {
+                    updateFavorite(game.n);
+                    openGameInPage(game);
+                };
+                container.appendChild(item);
+            });
+        }
+
+        // ============ FILTER GAMES ============
+        let currentFilter = 'all';
+
+        function filterGames(server) {
+            currentFilter = server;
+
+            document.querySelectorAll('.server-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const btnMap = {
+                'all': 'serverAll',
+                'yomi': 'serverYomi',
+                'duole': 'serverDuole',
+                'osgame': 'serverOsgame',
+                'cloudfront': 'serverCloudfront',
+                'xooncdn': 'serverXooncdn'
+            };
+            
+            const activeBtn = document.getElementById(btnMap[server]);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            renderGames(server);
+            showToast(`📂 Menampilkan: ${server === 'all' ? 'Semua Game' : 'Server ' + server}`);
+        }
+
+        function renderGames(server) {
+            const container = document.getElementById('gameGridGames');
+            if (!container) return;
+
+            const filtered = server === 'all' 
+                ? ALL_GAMES 
+                : ALL_GAMES.filter(g => g.server === server);
+
+            container.innerHTML = '';
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align:center; padding:40px 20px; opacity:0.5;">
+                        <div style="font-size:48px; margin-bottom:12px;">🎮</div>
+                        <div style="font-size:14px;">Tidak ada game di server ini</div>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(game => {
+                let card = document.createElement('div');
+                card.className = 'game-card';
+                let stickerHtml = game.moneyjar ? `<div class="moneyjar-sticker">💰Money Jar</div>` : '';
+                card.innerHTML = `
+                    <div class="game-img">
+                        ${stickerHtml}
+                        <img src="${game.img}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect fill=%22%23333%22 width=%2270%22 height=%2270%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23f39c12%22 font-size=%2220%22%3E🎮%3C/text%3E%3C/svg%3E'">
+                    </div>
+                    <div class="game-name">${game.n}</div>
+                `;
+                card.onclick = function() {
+                    updateFavorite(game.n);
+                    openGameInPage(game);
+                };
+                container.appendChild(card);
+            });
+        }
+
+        function updateServerCounts() {
+            const servers = {
+                'all': ALL_GAMES.length,
+                'yomi': ALL_GAMES.filter(g => g.server === 'yomi').length,
+                'duole': ALL_GAMES.filter(g => g.server === 'duole').length,
+                'osgame': ALL_GAMES.filter(g => g.server === 'osgame').length,
+                'cloudfront': ALL_GAMES.filter(g => g.server === 'cloudfront').length,
+                'xooncdn': ALL_GAMES.filter(g => g.server === 'xooncdn').length
+            };
+
+            document.getElementById('countAll').textContent = servers.all;
+            document.getElementById('countYomi').textContent = servers.yomi;
+            document.getElementById('countDuole').textContent = servers.duole;
+            document.getElementById('countOsgame').textContent = servers.osgame;
+            document.getElementById('countCloudfront').textContent = servers.cloudfront;
+            document.getElementById('countXooncdn').textContent = servers.xooncdn;
+        }
 
         // ============ MUSIK PLAYER ============
         let currentSongIndex = 0;
@@ -2361,26 +2761,17 @@ body {
             }
         }
 
-        // ============ KONFIGURASI AKUN ============
+        // ============ AKUN ============
         const DEFAULT_ACCOUNT = {
-            uid: '1756457056973000156',
-            token: 'update-MyToken',
-            nickname: 'SodroN',
-            avatar: 'https://i.ibb.co.com/F4zMvW25/20260712-173425.jpg',
-            isGuest: false,
-            isDefault: true
-        };
-
-        const GUEST_ACCOUNT = {
             uid: '1755883510169011759',
             token: 'nc9r4BmxIAhGGHY2MyC',
-            nickname: 'Tamu Xoon',
+            nickname: 'AkunTAMU',
             avatar: 'https://i.ibb.co.com/F4zMvW25/20260712-173425.jpg',
-            isGuest: true,
-            isDefault: false
+            isGuest: true
         };
 
         let ACCOUNT = { ...DEFAULT_ACCOUNT };
+        let showLoginForm = false;
 
         function loadAccount() {
             let saved = localStorage.getItem('account_SodroN');
@@ -2392,108 +2783,94 @@ body {
                     console.warn('Gagal load akun, menggunakan default');
                 }
             }
-            updateProfileDisplay();
+            renderAkun();
         }
 
         function saveAccount() {
             localStorage.setItem('account_SodroN', JSON.stringify(ACCOUNT));
         }
 
-        function updateProfileDisplay() {
-            document.getElementById('profileAvatar').src = ACCOUNT.avatar;
-            document.getElementById('profileNickname').textContent = ACCOUNT.nickname;
-            document.getElementById('editToken').value = ACCOUNT.token;
-            
-            const badge = document.getElementById('accountBadge');
-            if (ACCOUNT.isDefault) {
-                badge.textContent = '👑 Akun Default (SodroN)';
-                badge.className = 'account-badge default';
-            } else if (ACCOUNT.isGuest) {
-                badge.textContent = '👤 Akun Tamu';
-                badge.className = 'account-badge guest';
+        function renderAkun() {
+            const container = document.getElementById('akunCard');
+            if (!container) return;
+
+            if (showLoginForm) {
+                // Tampilkan Form Login
+                container.innerHTML = `
+                    <div class="akun-title"><span class="icon">🔐</span>Login Akun</div>
+                    
+                    <div class="login-form">
+                        <div class="input-group">
+                            <label>🆔 UID</label>
+                            <input type="text" id="inputUid" placeholder="Masukkan UID" value="${ACCOUNT.uid}">
+                        </div>
+                        <div class="input-group">
+                            <label>🔑 Token</label>
+                            <input type="text" id="inputToken" placeholder="Masukkan Token" value="${ACCOUNT.token}">
+                        </div>
+                        <button class="btn-login" onclick="loginAccount()">🚀 LOGIN</button>
+                    </div>
+
+                    <div class="akun-footer">Masukkan UID dan Token akun Xoon Anda</div>
+                `;
             } else {
-                badge.textContent = '👤 Akun Pengguna';
-                badge.className = 'account-badge';
+                // Tampilkan Info Akun
+                const uidDisplay = ACCOUNT.uid.length > 10 
+                    ? ACCOUNT.uid.slice(0, 8) + '******' 
+                    : ACCOUNT.uid;
+                
+                const statusClass = ACCOUNT.isGuest ? 'tamu' : '';
+                const statusText = ACCOUNT.isGuest ? '🟡 Akun Tamu' : '✅ Aktif';
+
+                container.innerHTML = `
+                    <div class="akun-title"><span class="icon">👤</span>Akun Aktif</div>
+                    
+                    <div class="akun-info">
+                        <div class="info-name">${ACCOUNT.nickname}</div>
+                        <div class="info-uid">UID: ${uidDisplay}</div>
+                        <div class="info-status ${statusClass}">${statusText}</div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <button class="btn-ganti" onclick="toggleLoginForm()">🔄 Ganti Akun</button>
+
+                    <div class="akun-footer">Akun tersimpan di browser</div>
+                `;
             }
         }
 
-        function saveAccountData() {
-            let token = document.getElementById('editToken').value.trim();
+        function toggleLoginForm() {
+            showLoginForm = !showLoginForm;
+            renderAkun();
+        }
+
+        function loginAccount() {
+            const uid = document.getElementById('inputUid').value.trim();
+            const token = document.getElementById('inputToken').value.trim();
             
-            if (!token) {
-                document.getElementById('tokenStatus').textContent = '❌ Token tidak boleh kosong!';
-                document.getElementById('tokenStatus').style.color = '#e74c3c';
+            if (!uid || !token) {
+                showToast('❌ UID dan Token harus diisi!');
                 return;
             }
             
+            ACCOUNT.uid = uid;
             ACCOUNT.token = token;
             ACCOUNT.isGuest = false;
-            ACCOUNT.isDefault = false;
+            // Coba cari nickname dari game data atau default
+            ACCOUNT.nickname = 'Pengguna Xoon';
             
             saveAccount();
-            updateProfileDisplay();
-            document.getElementById('tokenStatus').textContent = '✅ Token berhasil diperbarui!';
-            document.getElementById('tokenStatus').style.color = '#2ecc71';
-            showToast('✅ Token berhasil diperbarui!');
-            setTimeout(() => {
-                document.getElementById('tokenStatus').textContent = 'Akun tersimpan di browser';
-                document.getElementById('tokenStatus').style.color = 'rgba(255,255,255,0.5)';
-            }, 3000);
-        }
-
-        function loginAsGuest() {
-            ACCOUNT = { ...GUEST_ACCOUNT };
-            saveAccount();
-            updateProfileDisplay();
-            document.getElementById('tokenStatus').textContent = '✅ Login sebagai Tamu berhasil!';
-            document.getElementById('tokenStatus').style.color = '#2ecc71';
-            showToast('👤 Login sebagai Tamu berhasil!');
-            setTimeout(() => {
-                document.getElementById('tokenStatus').textContent = 'Akun tamu tersimpan di browser';
-                document.getElementById('tokenStatus').style.color = 'rgba(255,255,255,0.5)';
-            }, 3000);
-        }
-
-        function loginAsDefault() {
-            ACCOUNT = { ...DEFAULT_ACCOUNT };
-            saveAccount();
-            updateProfileDisplay();
-            document.getElementById('tokenStatus').textContent = '✅ Kembali ke akun default!';
-            document.getElementById('tokenStatus').style.color = '#3498db';
-            showToast('🔙 Kembali ke akun default SodroN');
-            setTimeout(() => {
-                document.getElementById('tokenStatus').textContent = 'Akun default tersimpan di browser';
-                document.getElementById('tokenStatus').style.color = 'rgba(255,255,255,0.5)';
-            }, 3000);
+            showLoginForm = false;
+            renderAkun();
+            showToast('✅ Login berhasil!');
         }
 
         function getAuthString() {
             return `uid=${ACCOUNT.uid}&token=${ACCOUNT.token}&nickname=${encodeURIComponent(ACCOUNT.nickname)}&avatar=${encodeURIComponent(ACCOUNT.avatar)}`;
         }
 
-        function renderGameGrid(containerId) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            container.innerHTML = '';
-
-            for (let game of ALL_GAMES) {
-                let card = document.createElement('div');
-                card.className = 'game-card';
-                let stickerHtml = game.moneyjar ? `<div class="moneyjar-sticker">💰Money Jar</div>` : '';
-                card.innerHTML = `
-                    <div class="game-img">
-                        ${stickerHtml}
-                        <img src="${game.img}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22%3E%3Crect fill=%22%23333%22 width=%2270%22 height=%2270%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23f39c12%22 font-size=%2220%22%3E🎮%3C/text%3E%3C/svg%3E'">
-                    </div>
-                    <div class="game-name">${game.n}</div>
-                `;
-                card.onclick = function() {
-                    openGameInPage(game);
-                };
-                container.appendChild(card);
-            }
-        }
-
+        // ============ GAME PLAY ============
         function renderGameSidebar(activeGame) {
             const sidebar = document.getElementById('gamePlaySidebar');
             if (!sidebar) return;
@@ -2513,6 +2890,7 @@ body {
                 `;
 
                 item.onclick = function() {
+                    updateFavorite(game.n);
                     openGameInPage(game);
                 };
 
@@ -2629,7 +3007,7 @@ body {
             }, 2500);
         }
 
-        let currentTab = 'musik';
+        let currentTab = 'games';
 
         function switchTab(tab) {
             currentTab = tab;
@@ -2655,6 +3033,16 @@ body {
 
             if (tab !== 'games') {
                 closeGameFrame();
+            }
+
+            if (tab === 'games') {
+                startSlide();
+            } else {
+                if (slideInterval) clearInterval(slideInterval);
+            }
+
+            if (tab === 'akun') {
+                renderAkun();
             }
         }
 
@@ -2683,9 +3071,13 @@ body {
 
         // ============ INIT ============
         loadAccount();
-        renderGameGrid('gameGridGames');
+        loadFavorites();
         renderPlaylist();
         updateAboutStats();
+        initSlider();
+        updateServerCounts();
+        renderFavorites();
+        renderGames('all');
 
         if (PLAYLIST[0]) {
             loadSong(0);
@@ -2698,8 +3090,6 @@ body {
         console.log('🚀 SodroN Loaded!');
         console.log('📌 Total Games:', ALL_GAMES.length);
         console.log('📌 Total Lagu:', PLAYLIST.length);
-        console.log('📌 Shortcut: Space (Play/Pause), Arrow Left/Right (Prev/Next)');
-        console.log('📌 Kredit: Semua game dari Xoon.live');
         console.log('👤 Akun saat ini:', ACCOUNT.nickname);
         console.log('📱 Website siap digunakan!');
     </script>
